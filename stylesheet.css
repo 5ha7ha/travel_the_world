@@ -1,0 +1,47 @@
+
+:root{
+    --bg: #DFF1F1;
+    --panel-1: #;
+    --panel-2: #;
+    --text-color: #ffffff;
+    --footer: #9aa0aa;
+}
+
+body{
+    background-color: var(--bg);
+}
+
+
+/* map */
+.map-container {
+    position: relative;
+    height: 70vh;
+}
+
+.map-container a {
+    position: absolute;
+}
+
+.map-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.pin {
+    position: absolute;
+    left: var(--x);              /* each flag gets its own x and y */
+    top: var(--y);
+    transform: translate(-50%, -50%);   /* centers the flag on that point */
+}
+
+
+
+/* Footer */
+footer{
+  background: var(--panel-1);
+  color: var(--footer);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
