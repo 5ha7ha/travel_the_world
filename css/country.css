@@ -1,0 +1,287 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&display=swap");
+
+/* =====================================================================
+   country.css - one stylesheet for every country page.
+   Loads AFTER stylesheet.css. Everything is scoped to body.country,
+   so other pages are not affected.
+
+   TO CHANGE COLOURS FOR A COUNTRY: don't edit this file. Put the
+   variables you want to change in the <body> tag of that page, e.g.
+   <body class="country" style="--accent:#aa151b; --hero-bg:#2b0a0c;">
+   ===================================================================== */
+
+body.country {
+  /* ---- colours (the ones you will change most) ---- */
+  --accent:     #c8102e;   /* line under the quote, fact bars, card tops */
+  --hero-bg:    #1a1413;   /* dark background behind the flag */
+  --hero-glow:  rgba(200, 16, 46, .45);  /* soft light behind the flag */
+  --hero-text:  #ffffff;   /* text on the dark hero */
+  --hero-label: #d9cfcd;   /* small labels (Country, Capital...) */
+
+  /* ---- colours (the rest of the page) ---- */
+  --text:       #1a1413;
+  --text-muted: #5d5453;
+  --paper:      #ffffff;   /* main page background */
+  --mist:       #f3f1f1;   /* background of the "Where to visit" section */
+
+  /* ---- fonts ---- */
+  --font-body:    "Alegreya Sans", "Segoe UI", Tahoma, sans-serif;
+  --font-display: "Alegreya Sans", "Segoe UI", Tahoma, sans-serif;
+
+  /* ---- sizes ---- */
+  --flag-width: 380px;
+  --max-width:  1100px;
+
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--text);
+  background: var(--paper);
+}
+body.country h2,
+body.country h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+body.country h2 { font-size: 2rem; margin: 0 0 1.5rem; }
+
+/* ---------- Intro: flag in the centre ---------- */
+body.country #intro {
+  background:
+    radial-gradient(ellipse at 50% 38%, var(--hero-glow), transparent 60%),
+    var(--hero-bg);
+  color: var(--hero-text);
+  text-align: center;
+  padding: 4rem 1.25rem 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.75rem;
+}
+body.country .country-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.75rem;
+  width: 100%;
+}
+
+/* flag on a pole that sways in 3D */
+body.country .flag-box {
+  position: relative;
+  padding-left: 14px;
+  perspective: 900px;
+  animation: country-rise 1s cubic-bezier(.2, .8, .2, 1) both;
+}
+body.country .flag-box::before {          /* the pole - stops just below the flag */
+  content: "";
+  position: absolute;
+  left: 0; top: -10px; bottom: -14px;
+  width: 8px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #8a8180, #e7e2e1 50%, #8a8180);
+}
+body.country .flag-box img {
+  display: block;
+  width: min(var(--flag-width), 78vw);
+  transform-origin: left center;
+  animation: country-wave 5s ease-in-out infinite;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .5);
+}
+body.country .flag-box::after {           /* light sheen travelling across the cloth */
+  content: "";
+  position: absolute;
+  inset: 0 0 0 14px;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .28) 50%, transparent 70%);
+  background-size: 250% 100%;
+  animation: country-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes country-wave {
+  0%, 100% { transform: rotateY(-16deg) skewY(-2deg); }
+  50%      { transform: rotateY(12deg)  skewY(2deg); }
+}
+@keyframes country-sheen {
+  0%, 100% { background-position: 120% 0; }
+  50%      { background-position: -20% 0; }
+}
+@keyframes country-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* quick facts */
+body.country .info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem 2.5rem;
+  animation: country-rise 1s .25s cubic-bezier(.2, .8, .2, 1) both;
+}
+body.country .info-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 7rem;
+}
+body.country .info-list .label { color: var(--hero-label); font-size: .95rem; }
+body.country .info-list .value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+body.country .quote-box { animation: country-rise 1s .45s cubic-bezier(.2, .8, .2, 1) both; }
+body.country .quote-box .quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 3px solid var(--accent);
+}
+
+/* ---------- Did you know? (left) + Food (right) ---------- */
+body.country .split {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 3.5rem;
+}
+body.country .split section { padding: 0; }
+
+body.country .facts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+body.country .facts-list li {
+  padding: .25rem 0 .25rem 1.1rem;
+  border-left: 4px solid var(--accent);
+  max-width: 34ch;
+  line-height: 1.45;
+}
+
+body.country .food-row { display: grid; gap: 1.5rem; }
+body.country .food-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.25rem;
+  align-items: center;
+}
+body.country .arch {                      /* arched picture frame */
+  margin: 0;
+  height: 150px;
+  background: var(--mist);
+  border-radius: 999px 999px 8px 8px;
+  overflow: hidden;
+}
+body.country .arch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+body.country .food-item h3 { font-size: 1.35rem; margin: 0 0 .25rem; }
+body.country .food-item p {
+  margin: 0;
+  color: var(--text-muted);
+  max-width: 38ch;
+  line-height: 1.4;
+}
+
+/* ---------- Where to visit ---------- */
+body.country #visit {
+  background: var(--mist);
+  padding: 4rem 1.25rem 4.5rem;
+}
+body.country #visit > * {
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+body.country .visit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+body.country .visit-card {
+  background: var(--paper);
+  padding: 1.75rem 1.5rem;
+  border-top: 5px solid var(--accent);
+}
+body.country .visit-card h3 { font-size: 1.3rem; margin: 0 0 .5rem; }
+body.country .visit-card p { margin: 0; color: var(--text-muted); line-height: 1.4; }
+
+body.country footer { padding: 1.5rem 1rem; text-align: center; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 800px) {
+  body.country .split { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.25rem; }
+  body.country .food-item { grid-template-columns: 96px 1fr; }
+  body.country .arch { height: 120px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.country .flag-box, body.country .flag-box img, body.country .flag-box::after,
+  body.country .info-list, body.country .quote-box { animation: none; }
+}
+
+
+/* ---------- Visit cards with pictures ---------- */
+body.country .visit-card {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+body.country .visit-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+body.country .visit-card h3 { padding: 1.25rem 1.5rem 0; margin: 0 0 .5rem; }
+body.country .visit-card p  { padding: 0 1.5rem 1.5rem; }
+
+/* -------- Uknow background ------ */
+body.country #uknow {
+  background-image:
+    linear-gradient(rgba(255,255,255,.40), rgba(255,255,255,.60)),
+    url("../img/Yemen/yemen-flag-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center, right center;
+  background-size: cover;
+}
+
+
+/* ---------- Map background (intro) ---------- */
+body.country #intro {
+  position: relative;
+  overflow: hidden;
+}
+
+body.country #intro .bg-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
+  filter: none;
+  mix-blend-mode: normal;
+  opacity: .2;          /* change this number for a stronger or fainter map */
+  padding: 1.5rem;
+}
+
+/* keep the text above the map */
+body.country #intro > *:not(.bg-map) {
+  position: relative;
+  z-index: 1;
+}
