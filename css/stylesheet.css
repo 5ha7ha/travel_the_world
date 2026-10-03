@@ -1,7 +1,7 @@
 
 :root{
     --bg: #DFF1F1;
-    --panel-1: #;
+    --panel-1: #1d3b3d;
     --panel-2: #;
     --text-color: #ffffff;
     --footer: #9aa0aa;
@@ -64,8 +64,10 @@ body{
 .map-container a { animation: float 3s ease-in-out infinite; }
 .map-container a:nth-child(2) { animation-delay: 1s; }
 @keyframes float { 50% { transform: translateY(-10px); } }
-.map-container a:hover { transform: scale(1.5); transition: transform 0.3s; }
+.map-image { transition: transform 0.3s; }
+.map-container a:hover .map-image { transform: scale(1.5); transition: transform 0.3s; }
 
+/* Weather Section */
 #weather {
     max-width: 900px;
     margin: 2rem auto;
@@ -75,7 +77,7 @@ body{
 
 .weather-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 16px;
 }
 
@@ -257,32 +259,45 @@ footer{
 }
 
 
-/* Responsive Design */
-@media (max-width: 767px) {
-    .form-row {
-        flex-direction: column;      /* input above button on phones */
-    }
-    
-    .facts th,
-    .facts td {
-        padding: 10px 12px;
-        font-size: 0.95rem;
-    }
-}
+/* ============================================
+   RESPONSIVE: mobile first
+   Base styles above = PHONES (375px and up)
+   ============================================ */
 
-@media (min-width: 700px) {
+/* TABLET: 768px and wider */
+@media (min-width: 768px) {
     #nav-brand {
         font-weight: 800;
         font-size: 2.5rem;
     }
-    .navbar-brand img {
-    width: 42px;
-    height: 42px;
 
+    .navbar-brand img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .weather-grid {
+        grid-template-columns: repeat(2, 1fr);   /* 2 x 2 */
+    }
+
+    .form-row {
+        flex-direction: row;                     /* input and button side by side */
+    }
+
+    .facts th,
+    .facts td {
+        padding: 14px 18px;
+        font-size: 1rem;
     }
 }
-@media (max-width: 767px) {
+
+/* LAPTOP: 1024px and wider */
+@media (min-width: 1024px) {
+    #weather {
+        max-width: 1100px;
+    }
+
     .weather-grid {
-        grid-template-columns: 1fr;      /* cards stack on phones */
+        grid-template-columns: repeat(4, 1fr);   /* 4 in a row */
     }
 }
