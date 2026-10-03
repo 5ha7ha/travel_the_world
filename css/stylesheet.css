@@ -27,7 +27,7 @@ body{
 /* map */
 #map{
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
-                       url(img/normal_map.jpg);
+                       url(../img/normal_map.jpg);
     background-size: cover;
     background-position: center;
     padding: 60px 20px;
@@ -118,7 +118,7 @@ body{
 /* Facts Table */
 #many {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
-                    url('img/city.jpg');
+                    url('../img/city.jpg');
   background-size: cover;
   background-position: center;
   position: relative;

@@ -163,6 +163,7 @@
 .yemen  #uknow { background-image: url("../img/Yemen/yemen-flag-bg.jpg"); }
 .spain  #uknow { background-image: url("../img/Spain/spain-uknow.jpg"); }
 .kazakh #uknow { background-image: url("../img/Kazakh/uknow-bg.jpg"); }
+.korea  #uknow { background-image: url("../img/Korea/korea-uknow.jpg"); }
 
 /* The facts, each with a coloured bar on the left */
 .country .facts-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
