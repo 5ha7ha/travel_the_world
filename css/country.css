@@ -117,7 +117,7 @@ body.country .info-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: .75rem 2.5rem;
+    gap: .75rem 2.5rem;
   animation: country-rise 1s .25s cubic-bezier(.2, .8, .2, 1) both;
 }
 body.country .info-list li {
@@ -165,6 +165,7 @@ body.country .facts-list li {
   border-left: 4px solid var(--accent);
   max-width: 34ch;
   line-height: 1.45;
+  font-weight: 500;
 }
 
 body.country .food-row { display: grid; gap: 1.5rem; }
@@ -258,7 +259,14 @@ body.country #uknow {
   background-position: center, right center;
   background-size: cover;
 }
-
+body.country #uknow  #spain-uknow {
+  background-image:
+    linear-gradient(rgba(255,255,255,.40), rgba(255,255,255,.60)),
+    url("../img/Spain/spain-uknow.jpg");
+  background-repeat: no-repeat;
+  background-position: center, right center;
+  background-size: cover;
+}
 
 /* ---------- Map background (intro) ---------- */
 body.country #intro {
