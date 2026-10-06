@@ -62,7 +62,7 @@ body{
 }
 /*animaton flags*/
 .map-container a { animation: float 3s ease-in-out infinite; }
-.map-container a:nth-child(2) { animation-delay: 1s; }
+.map-container a:nth-child(even) { animation-delay: 1s; }
 @keyframes float { 50% { transform: translateY(-10px); } }
 .map-image { transition: transform 0.3s; }
 .map-container a:hover .map-image { transform: scale(1.5); transition: transform 0.3s; }
@@ -216,6 +216,7 @@ body{
 
 .form-row {
     display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
