@@ -1,0 +1,138 @@
+/* Game section. Change the variables to match your site colors. */
+#game {
+    --game-bg: #dcf0f0;
+    --game-accent: #2a7f8f;
+    --game-accent-dark: #1d5c68;
+    --game-good: #2e8b57;
+    --game-bad: #c0392b;
+    --game-text: #1f2d33;
+
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 16px;
+    text-align: center;
+}
+
+.game-board {
+    background: var(--game-bg);
+    color: var(--game-text);
+    border-radius: 16px;
+    padding: 24px 16px;
+    transition: box-shadow 0.2s;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    font-weight: bold;
+}
+
+.game-stats p {
+    margin: 0;
+}
+
+.game-cards {
+    margin: 20px 0;
+}
+
+.game-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    height: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.game-card h3 {
+    margin: 0 0 8px;
+}
+
+.game-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.game-vs {
+    font-weight: bold;
+    color: var(--game-accent-dark);
+}
+
+.game-question {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.game-btn {
+    background: var(--game-accent);
+    color: #fff;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.game-btn:hover:not(:disabled) {
+    background: var(--game-accent-dark);
+}
+
+.game-btn:focus-visible {
+    outline: 3px solid #f1c40f;
+    outline-offset: 2px;
+}
+
+.game-btn:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.game-btn:disabled {
+    background: #9aa8ab;
+    cursor: not-allowed;
+}
+
+.game-restart {
+    margin-top: 16px;
+    background: transparent;
+    color: var(--game-accent-dark);
+    border-color: var(--game-accent-dark);
+}
+
+.game-restart:hover {
+    background: var(--game-accent-dark);
+    color: #fff;
+}
+
+.game-message {
+    min-height: 1.5em;
+    margin: 16px 0 0;
+    font-weight: bold;
+}
+
+.game-message.correct {
+    color: var(--game-good);
+}
+
+.game-message.wrong {
+    color: var(--game-bad);
+}
+
+/* state: game over */
+.game-board.game-over {
+    box-shadow: 0 0 0 3px var(--game-bad);
+}
+
+/* state: new best streak */
+.new-best {
+    color: var(--game-good);
+}
