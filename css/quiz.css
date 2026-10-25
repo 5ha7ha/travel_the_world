@@ -1,0 +1,82 @@
+/* quiz.css - basic styles for the Yemen quiz */
+
+#quiz {
+  padding: 3rem 1rem;
+}
+
+#quiz h2 {
+  text-align: center;
+}
+
+.quiz-card {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: var(--mist);
+  border-top: 5px solid var(--accent);
+}
+
+.quiz-stats {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+/* answer buttons: 2 columns, 1 column on small screens */
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.quiz-option,
+.quiz-btn {
+  padding: 10px;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  background: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+.quiz-option:hover,
+.quiz-btn:hover {
+  background: var(--mist);
+}
+
+.quiz-option:focus,
+.quiz-btn:focus {
+  outline: 3px solid black;
+}
+
+.quiz-btn-main {
+  background: var(--accent);
+  color: white;
+}
+
+.quiz-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* states added by JavaScript */
+.quiz-option.correct { background: green; color: white; }
+.quiz-option.wrong   { background: darkred; color: white; }
+.quiz-option.removed { opacity: 0.3; text-decoration: line-through; }
+
+.quiz-feedback         { min-height: 1.5em; font-weight: bold; }
+.quiz-feedback.success { color: green; }
+.quiz-feedback.error   { color: darkred; }
+.quiz-feedback.info    { color: #8a5a00; }
+
+.quiz-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.quiz-result {
+  text-align: center;
+}
+
+.quiz-result.win h3  { color: green; }
+.quiz-result.loss h3 { color: darkred; }

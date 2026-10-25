@@ -11,8 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=Corinthia:wght@400;700&family=Crafty+Girls&family=Fuzzy+Bubbles:wght@400;700&family=Paprika&display=swap" rel="stylesheet">
     <!-------------->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/country.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <script src="Js/quiz.js" defer></script>
     </head>
 
     <!-- CHANGE COLOURS FOR THIS COUNTRY in the style="" below. Examples:
@@ -43,6 +44,9 @@
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="#visit">Where to visit</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#quiz">Quiz</a>
                         </li>
                     </ul>
                 </div>
@@ -129,6 +133,39 @@
                     <h3>Aden</h3>
                     <p>A port city on the Arabian Sea, built around an old volcano crater, with beaches and a historic harbor.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Quiz Game -->
+        <section id="quiz">
+            <h2>Yemen Quiz</h2>
+            <div class="quiz-card">
+        
+                <!-- the game -->
+                <div id="quiz-game">
+                    <div class="quiz-stats">
+                        <span id="quiz-progress"></span>
+                        <span id="quiz-lives"></span>
+                        <span id="quiz-score"></span>
+                    </div>
+        
+                    <h3 id="quiz-question"></h3>
+                    <div id="quiz-options" class="quiz-options"></div>
+                    <p id="quiz-feedback" class="quiz-feedback" aria-live="polite"></p>
+        
+                    <div class="quiz-actions">
+                        <button type="button" id="quiz-hint" class="quiz-btn">50/50</button>
+                        <button type="button" id="quiz-next" class="quiz-btn quiz-btn-main d-none">Next question</button>
+                    </div>
+                </div>
+        
+                <!-- the end screen -->
+                <div id="quiz-result" class="quiz-result d-none">
+                    <h3 id="quiz-result-title"></h3>
+                    <p id="quiz-result-text"></p>
+                    <button type="button" id="quiz-restart" class="quiz-btn quiz-btn-main">Play again</button>
+                </div>
+        
             </div>
         </section>
 
