@@ -1,16 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&display=swap");
 
 :root{
     --bg: #DFF1F1;
     --panel-1: #1d3b3d;
-    --panel-2: #;
     --text-color: #ffffff;
     --footer: #9aa0aa;
     --firooze: #2f6f73;
     --firooze-light: #00A6A6;
+    --mist: var(--bg);              /* same teal as --bg; quiz.css uses this name */
+    --error: #c8102e;
+    --success: #1f7a4d;
 }
 
 body{
     background-color: var(--bg);
+    font-family: "Alegreya Sans", "Segoe UI", sans-serif;
+    color: var(--panel-1);
 }
 
 #nav-brand {
@@ -22,6 +27,38 @@ body{
     width: 32px;
     height: 32px;
 
+}
+
+/* Navbar: hover, keyboard focus and current page (colors come from Bootstrap's navbar variables) */
+.navbar {
+    --bs-navbar-color: var(--panel-1);
+    --bs-navbar-hover-color: var(--firooze);
+    --bs-navbar-active-color: var(--firooze);
+}
+.navbar .nav-link {
+    position: relative;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.navbar .nav-link:hover::before,
+.navbar .nav-link:focus-visible::before,
+.navbar .nav-link.active::before {
+    transform: scaleX(1);
+}
+.navbar .nav-link.active {
+    font-weight: 700;
+}
+
+/* Countries dropdown: same colors instead of Bootstrap's default blue */
+.dropdown-menu {
+    --bs-dropdown-link-hover-bg: #DFF1F1;
+    --bs-dropdown-link-hover-color: var(--firooze);
+    --bs-dropdown-link-active-bg: var(--firooze);
+    --bs-dropdown-link-active-color: #fff;
+}
+.dropdown-item {
+    transition: background-color 0.2s, color 0.2s;
 }
 
 /* map */
@@ -50,6 +87,7 @@ body{
     height: 60px;
     object-fit: cover;
     border-radius: 50%;
+    transition: transform 0.3s;
 }
 .map-container {
     display: flex;
@@ -64,8 +102,7 @@ body{
 .map-container a { animation: float 3s ease-in-out infinite; }
 .map-container a:nth-child(even) { animation-delay: 1s; }
 @keyframes float { 50% { transform: translateY(-10px); } }
-.map-image { transition: transform 0.3s; }
-.map-container a:hover .map-image { transform: scale(1.5); transition: transform 0.3s; }
+.map-container a:hover .map-image { transform: scale(1.5); }
 
 /* Weather Section */
 #weather {
@@ -250,6 +287,237 @@ body{
     background-color: #24565a;
 }
 
+/* ===== Plan My Trip page ===== */
+.plan-intro {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+}
+
+.plan-intro h1 {
+    color: var(--firooze);
+    font-weight: 700;
+    font-size: 2.4rem;
+}
+
+.plan-intro p {
+    font-size: 1.15rem;
+    max-width: 36rem;
+    margin: 0.5rem auto 0;
+}
+
+.plan-layout {
+    padding-bottom: 3rem;
+}
+
+/* cards */
+.plan-card {
+    background: #fff;
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    box-shadow: 0 6px 18px rgba(29, 59, 61, 0.12);
+}
+
+.plan-card h2 {
+    color: var(--firooze);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* form fields */
+.form-label {
+    font-weight: 700;
+}
+
+.form-control,
+.form-select {
+    border: 2px solid #b9d6d6;
+    border-radius: 0.75rem;
+    padding: 0.6rem 0.8rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:hover,
+.form-select:hover {
+    border-color: var(--firooze-light);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--firooze);
+    box-shadow: 0 0 0 0.25rem rgba(0, 166, 166, 0.3);
+}
+
+/* error and valid states */
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--error);
+    background-image: none;
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    box-shadow: 0 0 0 0.25rem rgba(200, 16, 46, 0.25);
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: var(--success);
+    background-image: none;
+}
+
+.invalid-feedback {
+    color: var(--error);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* buttons */
+.plan-btn,
+.plan-btn-outline {
+    border-radius: 0.75rem;
+    padding: 0.6rem 1.5rem;
+    font-weight: 700;
+    font-family: inherit;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.plan-btn {
+    background: var(--firooze);
+    border: 2px solid var(--firooze);
+    color: #fff;
+}
+
+.plan-btn:hover {
+    background: var(--firooze-light);
+    border-color: var(--firooze-light);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.plan-btn-outline {
+    background: transparent;
+    border: 2px solid var(--firooze);
+    color: var(--firooze);
+}
+
+.plan-btn-outline:hover {
+    background: var(--firooze);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.plan-btn:focus-visible,
+.plan-btn-outline:focus-visible {
+    outline: 3px solid var(--panel-1);
+    outline-offset: 3px;
+}
+
+/* summary card */
+.summary-card {
+    position: sticky;
+    top: 1rem;
+    border-top: 6px solid var(--firooze-light);
+}
+
+.summary-flag {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.summary-flag img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--firooze);
+}
+
+.summary-flag p {
+    margin: 0.5rem 0 0;
+    font-weight: 700;
+}
+
+.summary-empty {
+    text-align: center;
+    font-style: italic;
+}
+
+.summary-list div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed #b9d6d6;
+}
+
+.summary-list dt {
+    font-weight: 700;
+}
+
+.summary-list dd {
+    margin: 0;
+    text-align: right;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.summary-total strong {
+    color: var(--firooze);
+    font-size: 2rem;
+}
+
+.summary-note {
+    font-size: 0.9rem;
+    margin: 0.5rem 0 0;
+}
+
+/* passport stamp success message */
+.stamp-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.stamp-wrap[hidden] {
+    display: none;
+}
+
+.stamp {
+    background: #fff;
+    border: 4px double var(--firooze);
+    border-radius: 1.25rem;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    max-width: 34rem;
+    width: 100%;
+    transform: rotate(-2deg);
+    box-shadow: 0 8px 20px rgba(29, 59, 61, 0.18);
+}
+
+.stamp img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--firooze);
+}
+
+.stamp h2 {
+    color: var(--success);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0.75rem 0 0.5rem;
+}
+
 /* Footer */
 footer{
   background: var(--panel-1);
@@ -257,6 +525,12 @@ footer{
   text-align: center;
   padding: 1rem;
   margin-top: 2rem;
+}
+footer p { margin-bottom: 0.35rem; }
+footer p:last-child { margin-bottom: 0; }
+footer .credits {
+    font-size: 0.8rem;
+    color: #aeb6bd;      /* lighter than the footer gray so the small text stays readable */
 }
 
 
@@ -267,6 +541,14 @@ footer{
 
 /* TABLET: 768px and wider */
 @media (min-width: 768px) {
+    .plan-intro h1 {
+        font-size: 3rem;
+    }
+
+    .plan-card {
+        padding: 2rem;
+    }
+
     #nav-brand {
         font-weight: 800;
         font-size: 2.5rem;
@@ -300,5 +582,11 @@ footer{
 
     .weather-grid {
         grid-template-columns: repeat(4, 1fr);   /* 4 in a row */
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
     }
 }

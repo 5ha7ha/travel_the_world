@@ -1,7 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&display=swap");
-
-
-
 /* ---------- 1. SETTINGS (colours, font, sizes) ----------
    Everything below uses these variables, so changing one here
    (or in the <body> tag) changes it everywhere. */
@@ -195,6 +191,17 @@
 .country .visit-card img { display: block; width: 100%; height: 210px; object-fit: cover; }
 .country .visit-card h3  { margin: 0; padding: 1.25rem 1.5rem .5rem; font-size: 1.3rem; }
 .country .visit-card p   { margin: 0; padding: 0 1.5rem 1.5rem; color: var(--text-muted); line-height: 1.4; }
+
+/* hover: place cards lift and the photo zooms; dishes slide a little and the photo zooms */
+.country .visit-card      { transition: transform .25s, box-shadow .25s; }
+.country .visit-card img  { transition: transform .4s; }
+.country .visit-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0, 0, 0, .18); }
+.country .visit-card:hover img { transform: scale(1.05); }
+
+.country .food-item       { transition: transform .25s; }
+.country .arch img        { transition: transform .4s; }
+.country .food-item:hover { transform: translateX(6px); }
+.country .food-item:hover .arch img { transform: scale(1.08); }
 
 .country footer { margin-top: 0; padding: 1.5rem 1rem;}
 
