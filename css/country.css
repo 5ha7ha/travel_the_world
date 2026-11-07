@@ -1,11 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&display=swap");
 
-/* =====================================================================
-   country.css - one stylesheet for every country page.
-   Loads after stylesheet.css.
-   Per-country colours go in the <body> tag of each page, not in this file:
-   <body class="country spain" style="--accent:#aa151b; --hero-bg:#2b0a0c;">
-   ===================================================================== */
 
 
 /* ---------- 1. SETTINGS (colours, font, sizes) ----------
@@ -162,7 +156,7 @@
 /* ONE line per country: its own picture (file names must match yours) */
 .yemen  #uknow { background-image: url("../img/Yemen/yemen-flag-bg.jpg"); }
 .spain  #uknow { background-image: url("../img/Spain/spain-uknow.jpg"); }
-.kazakh #uknow { background-image: url("../img/Kazakh/uknow-bg.jpg"); }
+.kazakhstan #uknow { background-image: url("../img/Kazakh/uknow-bg.jpg"); }
 .korea  #uknow { background-image: url("../img/Korea/korea-uknow.jpg"); }
 
 /* The facts, each with a coloured bar on the left */
@@ -202,7 +196,7 @@
 .country .visit-card h3  { margin: 0; padding: 1.25rem 1.5rem .5rem; font-size: 1.3rem; }
 .country .visit-card p   { margin: 0; padding: 0 1.5rem 1.5rem; color: var(--text-muted); line-height: 1.4; }
 
-.country footer { padding: 1.5rem 1rem; text-align: center; }
+.country footer { margin-top: 0; padding: 1.5rem 1rem;}
 
 
 /* ---------- 5. PHONES + REDUCED MOTION ---------- */
@@ -212,5 +206,58 @@
   .country .arch      { height: 120px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .country *, .country *::after { animation: none !important; }       /* no animation for people who turn it off */
+  .country *, .country *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- 6. COUNTRY PICKER + "VISIT ANOTHER COUNTRY" ---------- */
+#picker { text-align: center; padding: 3rem 1rem; }
+#more   { text-align: center; padding: 2rem 1rem 3rem; }
+
+.flag-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.flag-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .25s;
+}
+.flag-link img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .25);
+}
+.flag-link:hover { transform: translateY(-4px) scale(1.05); }
+
+.country-btn {
+  display: inline-block;
+  margin-bottom: 2rem;
+  padding: .7rem 1.8rem;
+  border: 2px solid var(--accent);
+  border-radius: .75rem;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s, opacity .2s;
+}
+.country-btn:hover { color: #fff; opacity: .9; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 0, 0, .2); }
+
+.flag-link:focus-visible,
+.country-btn:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+
+@media (min-width: 1024px) {
+  .flag-link img { width: 96px; height: 96px; }
 }
