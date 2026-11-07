@@ -1,10 +1,11 @@
-// country.html?c=korea shows Korea, country.html?c=spain shows Spain...and like this
+// One page for every country: country.html?c=korea shows Korea, country.html?c=spain shows Spain.
+// The content comes from js/data.js and is built here with jQuery.
 
 
 // ===== HELPERS =====
 // find a country by its key, returns null when there is no such country
 function findCountry(key) {
-    const found = $.grep(countries, function (country) { // $ “use a utility tool”, and it works with lists not the page
+    const found = $.grep(countries, function (country) {
         return country.key === key;
     });
     return found.length > 0 ? found[0] : null;
@@ -27,12 +28,12 @@ function buildFlagLink(country) {
 // ===== BUILD THE SECTIONS =====
 function renderFacts(country) {
     const list = $("#factsList").empty();
-    $.each(country.facts, function (index, fact) { // each gives fixed things: positon, item itslef
+    $.each(country.facts, function (index, fact) {
         $("<li>").text(fact).appendTo(list);
     });
 }
 
-// same markup as the old pages: <div class="food-item"> <figure class="arch"> <img> </figure> <div> <h3> <p> </div></div>
+// same markup as the old pages: <div class="food-item"><figure class="arch"><img></figure><div><h3><p></div></div>
 function renderDishes(items) {
     const row = $("#foodList").empty();
 
@@ -52,7 +53,7 @@ function renderDishes(items) {
     });
 }
 
-// same markup as the old pages: <div class="visit-card"> <img><h3><p> </div>
+// same markup as the old pages: <div class="visit-card"><img><h3><p></div>
 function renderPlaces(items) {
     const grid = $("#placesList").empty();
 
@@ -81,7 +82,7 @@ function renderOtherCountries(current) {
 
 // ===== SHOW ONE COUNTRY =====
 function showCountry(country) {
-    // colors of this country 
+    // colors of this country (the old pages set the same variables on <body>)
     $("body").addClass(country.key).css({
         "--accent": country.accent,
         "--hero-bg": country.heroBg,
@@ -104,11 +105,15 @@ function showCountry(country) {
 
     // content from the arrays
     renderFacts(country);
-    renderDishes(itemsFor(dishes, country.key)); // itemsFor(list, key) and return a list based on the key
+    renderDishes(itemsFor(dishes, country.key));
     renderPlaces(itemsFor(places, country.key));
     renderOtherCountries(country);
 
-    // the Plan button opens plan.html with this country selected (?c=key) 
+    // the navbar dropdown marks this country, the planner opens with it selected
+    $(".dropdown-item").filter(function () {
+        return $(this).attr("href") === country.page;
+    }).addClass("active").attr("aria-current", "page");
+
     $("#planLink")
         .attr("href", "plan.html?c=" + country.key)
         .text("Plan a trip to " + country.name);

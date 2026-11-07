@@ -2,7 +2,7 @@
 const MAX_LIVES = 3;
 
 // Population in millions (approximate), from largest to smallest
-const countries = [
+const gameCountries = [
     { name: "India",          value: 1430 },
     { name: "China",          value: 1410 },
     { name: "USA",            value: 340 },
@@ -91,9 +91,9 @@ function randomInt(min, max) {
 
 // choose the next country, it must not be the same as the current one
 function pickNextCountry() {
-    nextIndex = randomInt(0, countries.length - 1);
+    nextIndex = randomInt(0, gameCountries.length - 1);
     while (nextIndex === currentIndex) {
-        nextIndex = randomInt(0, countries.length - 1);
+        nextIndex = randomInt(0, gameCountries.length - 1);
     }
 }
 
@@ -103,16 +103,16 @@ function showState() {
     streakEl.textContent = streak;
     bestEl.textContent = bestStreak;
 
-    currentNameEl.textContent = countries[currentIndex].name;
-    currentValueEl.textContent = countries[currentIndex].value + " million";
-    nextNameEl.textContent = countries[nextIndex].name;
+    currentNameEl.textContent = gameCountries[currentIndex].name;
+    currentValueEl.textContent = gameCountries[currentIndex].value + " million";
+    nextNameEl.textContent = gameCountries[nextIndex].name;
     nextValueEl.textContent = "?";
 
     if (gameOver === true) {
         questionEl.textContent = "Game over!";
     } else {
-        questionEl.textContent = "Does " + countries[nextIndex].name +
-            " have a higher or lower population than " + countries[currentIndex].name + "?";
+        questionEl.textContent = "Does " + gameCountries[nextIndex].name +
+            " have a higher or lower population than " + gameCountries[currentIndex].name + "?";
     }
 
     boardEl.classList.toggle("game-over", gameOver);
@@ -123,7 +123,7 @@ function startGame() {
     lives = MAX_LIVES;
     streak = 0;
     gameOver = false;
-    currentIndex = randomInt(0, countries.length - 1);
+    currentIndex = randomInt(0, gameCountries.length - 1);
     pickNextCountry();
     messageEl.textContent = "";
     messageEl.className = "game-message";
@@ -139,8 +139,8 @@ function checkGuess(guess) {
         return;
     }
 
-    const current = countries[currentIndex];
-    const next = countries[nextIndex];
+    const current = gameCountries[currentIndex];
+    const next = gameCountries[nextIndex];
 
     // equal values count as a right guess
     const isRight = (guess === "higher" && next.value >= current.value) ||
