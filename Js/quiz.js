@@ -1,54 +1,82 @@
-// All numbers of the game are here. Change them and the game still works.
 const START_LIVES = 3;       
 const START_HINTS = 1;       // thid for 50/50 hint
 const WRONG_TO_REMOVE = 2;   // how many wrong answers 50/50 removes
 
-// Each question: 4 options, correct is storing the index of correct answer
 const QUESTIONS = [
   {
+    country: "Yemen",  
     text: "Which Yemeni port gave its name to a coffee flavor?",
     options: ["Aden", "Mocha", "Hodeidah", "Mukalla"],
-    correct: 1
+    correct: 1,
+    fact: "Mocha was once the world's main port for exporting coffee."   
   },
   {
+    country: "Yemen",   
     text: "Which island is home to the umbrella-shaped dragon's blood tree?",
     options: ["Kamaran", "Zanzibar", "Socotra", "Crete"],
-    correct: 2
+    correct: 2,
+    fact: "Socotra is famous for plants that grow almost nowhere else on Earth."   
+  },
+  
+  {
+    country: "South Korea",
+    text: "Which fermented vegetable dish is served at almost every Korean meal?",
+    options: ["Bulgogi", "Tteokbokki", "Bibimbap", "Kimchi"],
+    correct: 3,
+    fact: "Kimchi is usually made from cabbage and radish with chili and garlic."
   },
   {
-    text: "Aden, Yemen's port city, is built inside what?",
-    options: ["An extinct volcano crater", "A desert canyon", "A coral reef", "A salt lake"],
-    correct: 0
+    country: "South Korea",
+    text: "Which king created the Korean alphabet, Hangul, in the 15th century?",
+    options: ["King Sejong", "King Gojong", "King Taejo", "King Yeongjo"],
+    correct: 0,
+    fact: "Hangul was designed to be easy to learn, so more people could read."
+  },
+  
+  {
+    country: "Kazakhstan",
+    text: "Which traditional two-stringed instrument is a symbol of Kazakh music?",
+    options: ["Oud", "Balalaika", "Dombra", "Sitar"],
+    correct: 2,
+    fact: "The dombra is used to accompany songs and storytelling."
   },
   {
-    text: "Which Yemeni city is nicknamed the \"Manhattan of the Desert\" for its tall mud-brick towers?",
-    options: ["Taiz", "Ibb", "Zabid", "Shibam"],
-    correct: 3
+    country: "Kazakhstan",
+    text: "Which Kazakh cosmodrome launched the first human into space in 1961?",
+    options: ["Plesetsk", "Baikonur", "Vostochny", "Kourou"],
+    correct: 1,
+    fact: "Baikonur is the oldest and one of the biggest space launch sites in the world."
+  },
+ 
+  {
+    country: "Spain",
+    text: "Which architect designed La Sagrada Família in Barcelona?",
+    options: ["Antoni Gaudí", "Santiago Calatrava", "Norman Foster", "Oscar Niemeyer"],
+    correct: 0,
+    fact: "Construction started in 1882 and it is still being finished."
   },
   {
-    text: "Which narrow strait separates Yemen from Africa?",
-    options: ["Strait of Hormuz", "Bab-el-Mandeb", "Strait of Gibraltar", "Bosphorus"],
-    correct: 1
-  },
-  {
-    text: "Which country is Yemen's northern neighbor?",
-    options: ["Saudi Arabia", "Iraq", "Jordan", "Egypt"],
-    correct: 0
+    country: "Spain",
+    text: "In which Spanish festival do people throw tomatoes at each other?",
+    options: ["San Fermín", "Las Fallas", "Semana Santa", "La Tomatina"],
+    correct: 3,
+    fact: "La Tomatina takes place every year in the town of Buñol."
   }
 ];
+
 
 // biringing page elements from html doc
 const gameBox = document.getElementById("quiz-game");
 const resultBox = document.getElementById("quiz-result");
 const progressEl = document.getElementById("quiz-progress");
-const livesEl = document.getElementById("quiz-lives");
+const quizLivesEl = document.getElementById("quiz-lives");           
 const scoreEl = document.getElementById("quiz-score");
-const questionEl = document.getElementById("quiz-question");
+const quizQuestionEl = document.getElementById("quiz-question");    
 const optionsBox = document.getElementById("quiz-options");
 const feedbackEl = document.getElementById("quiz-feedback");
 const hintBtn = document.getElementById("quiz-hint");
 const nextBtn = document.getElementById("quiz-next");
-const restartBtn = document.getElementById("quiz-restart");
+const quizRestartBtn = document.getElementById("quiz-restart");      
 const resultTitle = document.getElementById("quiz-result-title");
 const resultText = document.getElementById("quiz-result-text");
 
@@ -88,26 +116,33 @@ function render() {
   resultBox.classList.toggle("d-none", !state.over);
 
   if (state.over) {
+    // ADDED: calculated value, percentage of correct answers
+    const percent = Math.round(state.score / QUESTIONS.length * 100);
+
     resultBox.classList.toggle("win", state.won);
     resultBox.classList.toggle("loss", !state.won);
     if (state.won) {
       resultTitle.textContent = "You won!";
+      // CHANGED: added the percentage to the text
       resultText.textContent = "Score: " + state.score + " / " + QUESTIONS.length +
-        ". Lives left: " + state.lives + ".";
+        " (" + percent + "%). Lives left: " + state.lives + ".";
     } else {
       resultTitle.textContent = "Game over";
+      // CHANGED: added the percentage to the text
       resultText.textContent = "You ran out of lives. Score: " + state.score +
-        " / " + QUESTIONS.length + ".";
+        " / " + QUESTIONS.length + " (" + percent + "%).";
     }
     return;
   }
 
   const q = QUESTIONS[state.index];
 
-  progressEl.textContent = "Question " + (state.index + 1) + " / " + QUESTIONS.length;
-  livesEl.textContent = "Lives: " + "♥".repeat(state.lives) + "♡".repeat(START_LIVES - state.lives);
+  // CHANGED: shows the country name of the question too
+  progressEl.textContent = "Question " + (state.index + 1) + " / " + QUESTIONS.length +
+    " · " + q.country;
+  quizLivesEl.textContent = "Lives: " + "♥".repeat(state.lives) + "♡".repeat(START_LIVES - state.lives);  
   scoreEl.textContent = "Score: " + state.score;
-  questionEl.textContent = q.text;
+  quizQuestionEl.textContent = q.text;  
 
   // Build the option buttons
   optionsBox.replaceChildren();
@@ -165,10 +200,10 @@ function handleAnswer(i) {
 
   if (i === q.correct) {
     state.score++;
-    say("Correct!", "success");
+    say("Correct! " + q.fact, "success");   // CHANGED: shows the fact after "Correct!"
   } else {
     state.lives--;
-    say("Wrong answer. The correct one is highlighted.", "error");
+    say("Wrong answer. The correct one is highlighted. " + q.fact, "error");   // CHANGED: shows the fact
   }
   render();
   nextBtn.focus();
@@ -176,7 +211,14 @@ function handleAnswer(i) {
 
 // The player clicks 50/50
 function useHint() {
- 
+
+  // ADDED: invalid move check, show a message and do NOT change the game
+  if (state.hints === 0 || state.answered || state.removed.length > 0) {
+    say("You can't use 50/50 now.", "info");
+    render();
+    return;
+  }
+
   const q = QUESTIONS[state.index];
 
   // List of wrong options
@@ -222,7 +264,7 @@ function nextStep() {
   if (!state.over) {
     optionsBox.querySelector("button").focus();
   } else {
-    restartBtn.focus();
+    quizRestartBtn.focus();   
   }
 }
 
@@ -243,7 +285,7 @@ optionsBox.addEventListener("click", function (e) {
 
 hintBtn.addEventListener("click", useHint);
 nextBtn.addEventListener("click", nextStep);
-restartBtn.addEventListener("click", restart);
+quizRestartBtn.addEventListener("click", restart);   
 
 // ===================== START =====================
 state = newState();
