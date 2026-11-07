@@ -47,32 +47,32 @@
         <section id="game">
             <h1>Higher or Lower: Population</h1>
             <p>Does the next country have a higher or lower population? You have 3 lives!</p>
-        
-            <div class="game-board" id="gameBoard">
-                <div class="game-stats">
-                    <p>Lives: <span id="lives"></span></p>
-                    <p>Streak: <span id="streak">0</span></p>
-                    <p>Best streak: <span id="best">0</span></p>
-                </div>
-        
-                <div class="row g-3 align-items-center justify-content-center game-cards">
-                    <div class="col-12 col-md-5">
-                        <div class="game-card">
-                            <h3 id="currentName"></h3>
-                            <p class="game-value" id="currentValue"></p>
+            <div class="quiz-card">
+                <div class="game-board" id="gameBoard">
+                    <div class="game-stats">
+                        <p>Lives: <span id="lives"></span></p>
+                        <p>Streak: <span id="streak">0</span></p>
+                        <p>Best streak: <span id="best">0</span></p>
+                    </div>
+            
+                    <div class="row g-3 align-items-center justify-content-center game-cards">
+                        <div class="col-12 col-md-5">
+                            <div class="game-card">
+                                <h3 id="currentName"></h3>
+                                <p class="game-value" id="currentValue"></p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-2 game-vs">VS</div>
+
+                        <div class="col-12 col-md-5">
+                            <div class="game-card">
+                                <h3 id="nextName"></h3>
+                                <p class="game-value" id="nextValue">?</p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-12 col-md-2 game-vs">VS</div>
-
-                    <div class="col-12 col-md-5">
-                        <div class="game-card">
-                            <h3 id="nextName"></h3>
-                            <p class="game-value" id="nextValue">?</p>
-                        </div>
-                    </div>
-                </div>
-        
+                 </div>
                 <p id="gameQuestion" class="game-question"></p>
         
                 <div id="gameControls" class="game-controls">
