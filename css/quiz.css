@@ -1,25 +1,36 @@
-/* quiz.css - basic styles for the Yemen quiz */
-
 #quiz {
   padding: 3rem 1rem;
 }
 
-#quiz h2 {
+/* heading + intro sentence centered above the card */
+#quiz h2,
+#quiz > p {
   text-align: center;
 }
 
 .quiz-card {
+  --accent: #1f7a76;
+  --mist: #e3f2f1;
+
   max-width: 650px;
   margin: 0 auto;
   padding: 1.5rem;
-  background: var(--mist);
+  background: white;
   border-top: 5px solid var(--accent);
 }
 
 .quiz-stats {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   font-weight: bold;
+}
+
+/* question text: space above and below */
+.quiz-card h3 {
+  margin: 1.25rem 0;
+  font-size: 1.4rem;
 }
 
 /* answer buttons: 2 columns, 1 column on small screens */
@@ -64,7 +75,7 @@
 .quiz-option.wrong   { background: darkred; color: white; }
 .quiz-option.removed { opacity: 0.3; text-decoration: line-through; }
 
-.quiz-feedback         { min-height: 1.5em; font-weight: bold; }
+.quiz-feedback         { min-height: 1.5em; margin: 1rem 0; font-weight: bold; }
 .quiz-feedback.success { color: green; }
 .quiz-feedback.error   { color: darkred; }
 .quiz-feedback.info    { color: #8a5a00; }
