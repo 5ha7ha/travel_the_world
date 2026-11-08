@@ -6,6 +6,7 @@ function describe(code) {
     if (code <= 67) return ["🌧️", "Rain"];
     if (code <= 77) return ["❄️", "Snow"];
     if (code <= 82) return ["🌦️", "Showers"];
+    if (code <= 86) return ["🌨️", "Snow showers"];
     return ["⛈️", "Thunderstorm"];
 }
 

@@ -2,7 +2,6 @@
 // To add a country: add one object to `countries`, then its dishes and places to the other two arrays.
 
 // ===== COUNTRIES =====
-// population is in millions (the same numbers as the Higher or Lower game).
 // accent, heroBg and heroGlow are the colors of that country's intro section (they become the CSS
 // variables --accent, --hero-bg and --hero-glow on the page).
 const countries = [
@@ -114,7 +113,7 @@ const dishes = [
 // ===== PLACES (3 places for every country) =====
 const places = [
     { country: "yemen", name: "Socotra Island", description: "A remote island with dragon's blood trees, white sand beaches and wildlife seen nowhere else.", image: "img/Yemen/Sqtra.jpeg" },
-    { country: "yemen", name: "Old Sana'a", description: "A walled old city of tall tower houses, narrow lanes and busy markets, one of the oldest lived-in cities in the world.", image: "img/Yemen/old sana'a.jpg" },
+    { country: "yemen", name: "Old Sana'a", description: "A walled old city of tall tower houses, narrow lanes and busy markets, one of the oldest lived-in cities in the world.", image: "img/Yemen/old-sanaa.jpg" },
     { country: "yemen", name: "Aden", description: "A port city on the Arabian Sea, built around an old volcano crater, with beaches and a historic harbor.", image: "img/Yemen/Aden.jpeg" },
 
     { country: "spain", name: "Barcelona", description: "Home to Gaudí's Sagrada Família, this Catalan port city mixes Gothic alleys with modernist buildings", image: "img/Spain/barcelona.jpg" },

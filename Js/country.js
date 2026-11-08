@@ -109,11 +109,6 @@ function showCountry(country) {
     renderPlaces(itemsFor(places, country.key));
     renderOtherCountries(country);
 
-    // the navbar dropdown marks this country, the planner opens with it selected
-    $(".dropdown-item").filter(function () {
-        return $(this).attr("href") === country.page;
-    }).addClass("active").attr("aria-current", "page");
-
     $("#planLink")
         .attr("href", "plan.html?c=" + country.key)
         .text("Plan a trip to " + country.name);

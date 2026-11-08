@@ -41,24 +41,9 @@ body{
     transition: color 0.2s;
 }
 
-.navbar .nav-link:hover::before,
-.navbar .nav-link:focus-visible::before,
-.navbar .nav-link.active::before {
-    transform: scaleX(1);
-}
 .navbar .nav-link.active {
     font-weight: 700;
-}
-
-/* Countries dropdown: same colors instead of Bootstrap's default blue */
-.dropdown-menu {
-    --bs-dropdown-link-hover-bg: #DFF1F1;
-    --bs-dropdown-link-hover-color: var(--firooze);
-    --bs-dropdown-link-active-bg: var(--firooze);
-    --bs-dropdown-link-active-color: #fff;
-}
-.dropdown-item {
-    transition: background-color 0.2s, color 0.2s;
+    background-color: #c6dede;
 }
 
 /* map */
@@ -227,65 +212,6 @@ body{
     border-radius: 6px;
 }
 
-
-/* Newsletter Section */
-#subscribe {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 24px;
-    text-align: center;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-}
-
-#subscribe h2 {
-    color: #2f6f73;
-    margin-bottom: 0.5rem;
-}
-
-.newsletter-form label {
-    display: block;
-    text-align: left;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.form-row {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.newsletter-form input {
-    flex: 1;
-    min-width: 0;                    /* lets the input shrink on small screens */
-    padding: 12px 14px;
-    border: 1px solid #b7d6d6;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-.newsletter-form input:focus {
-    outline: none;
-    border-color: #2f6f73;
-    box-shadow: 0 0 0 3px #cfe7e7;
-}
-
-.newsletter-form button {
-    padding: 12px 22px;
-    border: none;
-    border-radius: 8px;
-    background-color: #2f6f73;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.newsletter-form button:hover {
-    background-color: #24565a;
-}
 
 /* ===== Plan My Trip page ===== */
 .plan-intro {
@@ -561,10 +487,6 @@ footer .credits {
 
     .weather-grid {
         grid-template-columns: repeat(2, 1fr);   /* 2 x 2 */
-    }
-
-    .form-row {
-        flex-direction: row;                     /* input and button side by side */
     }
 
     .facts th,
