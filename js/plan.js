@@ -43,7 +43,9 @@ if (findByKey(countries, preselected) !== null) {
 
 // the start date cannot be today or in the past
 function toDateString(date) {
-    return date.toISOString().split("T")[0];
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return date.getFullYear() + "-" + m + "-" + d;
 }
 
 const tomorrow = new Date();
@@ -58,6 +60,12 @@ function findByKey(list, key) {
         }
     }
     return null;
+}
+
+// "2026-11-10" -> a Date at local midnight (not UTC)
+function parseLocalDate(value) {
+    const parts = value.split("-").map(Number);
+    return new Date(parts[0], parts[1] - 1, parts[2]);
 }
 
 // ===== VALIDATION RULES =====
@@ -76,7 +84,9 @@ const rules = {
     },
     phone: function (value) {
         if (value.trim() === "") return "Please enter your phone number.";
-        if (!/^\+?[0-9\s\-()]{7,15}$/.test(value.trim())) return "Use 7 to 15 digits. A + at the start is allowed.";
+        const digits = value.replace(/\D/g, "");
+        if (!/^\+?[0-9\s\-()]+$/.test(value.trim()) || digits.length < 7 || digits.length > 15)
+            return "Use 7 to 15 digits. A + at the start is allowed.";
         return "";
     },
     destination: function (value) {
@@ -89,7 +99,7 @@ const rules = {
     },
     startDate: function (value) {
         if (value === "") return "Please choose a start date.";
-        const chosen = new Date(value);
+        const chosen = parseLocalDate(value);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         if (chosen <= today) return "The start date must be in the future.";
@@ -141,7 +151,7 @@ function calculateTotal(destination, style, days, travelers) {
 
 function formatDate(value) {
     if (value === "") return "-";
-    return new Date(value).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    return parseLocalDate(value).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 }
 
 function updateSummary() {
@@ -157,7 +167,7 @@ function updateSummary() {
     // dates: start date and the last day of the trip
     let dates = formatDate(fields.startDate.value);
     if (fields.startDate.value !== "" && days > 0) {
-        const end = new Date(fields.startDate.value);
+        const end = parseLocalDate(fields.startDate.value);
         end.setDate(end.getDate() + days - 1);
         dates = dates + " to " + formatDate(toDateString(end));
     }
