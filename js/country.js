@@ -1,6 +1,4 @@
-// One page for every country: country.html?c=korea shows Korea, country.html?c=spain shows Spain.
-// The content comes from js/data.js and is built here with jQuery.
-
+// country.html?c=korea shows Korea, country.html?c=spain shows Spain.
 
 // ===== HELPERS =====
 // find a country by its key, returns null when there is no such country
@@ -89,7 +87,7 @@ function showCountry(country) {
         "--hero-glow": country.heroGlow
     });
     document.title = country.name + " | Travel the World";
-    $("#countryTitle").text(country.name);
+    $("#countryTitle").text(country.name); // not visible in html
 
     // intro: map behind, flag, four values, quote
     $("#countryMap").attr({ src: country.map, alt: country.name + " map" });

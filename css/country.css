@@ -1,10 +1,6 @@
-/* ---------- 1. SETTINGS (colours, font, sizes) ----------
-   Everything below uses these variables, so changing one here
-   (or in the <body> tag) changes it everywhere. */
+
 .country {
   --accent:     #c8102e;                 /* quote line, fact bars, card tops */
-  --hero-bg:    #1a1413;                 /* dark intro background */
-  --hero-glow:  rgba(200, 16, 46, .45);  /* soft light behind the flag */
   --hero-text:  #ffffff;                 /* text in the intro */
   --hero-label: #d9cfcd;                 /* small labels (Country, Capital...) */
 
