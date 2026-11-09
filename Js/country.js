@@ -89,6 +89,7 @@ function showCountry(country) {
         "--hero-glow": country.heroGlow
     });
     document.title = country.name + " | Travel the World";
+    $("#countryTitle").text(country.name);
 
     // intro: map behind, flag, four values, quote
     $("#countryMap").attr({ src: country.map, alt: country.name + " map" });

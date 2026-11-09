@@ -11,7 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/country.css">
-    <link rel="stylesheet" href="css/newCountry.css">
 </head>
 <body class="country">
 
@@ -27,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html" id="homeNav">Home</a>
+                        <a class="nav-link active" href="index.html" id="homeNav">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="games.html">Games</a>
@@ -52,8 +51,8 @@
 
         <section id="intro">
             <img class="bg-map" id="countryMap" src="" alt="">
-
             <div class="country-info">
+                <h1 id="countryTitle" class="visually-hidden"></h1>
                 <div class="flag-box"><img id="countryFlag" src="" alt=""></div>
                 <ul class="info-list">
                     <li><span class="label">Country</span><span class="value" id="infoCountry"></span></li>
