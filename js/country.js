@@ -117,10 +117,10 @@ function showCountry(country) {
 
     // jQuery effects: facts slide in one by one, then dishes and places fade in one by one
     $(".facts-list li").hide().each(function (index) {
-        $(this).delay(index * 150).slideDown(300);
+        $(this).delay(index * 150).slideDown(800);
     });
     $(".food-item, .visit-card").hide().each(function (index) {
-        $(this).delay(index * 120).fadeIn(400);
+        $(this).delay(index * 120).fadeIn(800);
     });
 }
 
