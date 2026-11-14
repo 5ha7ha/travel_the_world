@@ -48,46 +48,30 @@ body{
 
 /* map */
 #map{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
-                       url(../img/normal_map.jpg);
-    background-size: cover;
-    background-position: center;
-    padding: 60px 20px;
+    background-color: var(--firooze);   /* #2f6f73, a lighter teal than before */
+    padding: 30px 20px 40px;
     color: white;
+}
+.map-container{
+    max-width: 760px;   /* was 1000px, so the map is smaller */
+    margin: 0 auto;
 }
 #map h1{
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 20px;
-    margin-top: 60px;
+    margin: 0 0 10px;
 }
 #map p{
     text-align: center;
     font-size: 1.2rem;
-    margin-top: 10px;
-    margin-bottom: 40px;
+    margin: 0 0 20px;
 }
-.map-image {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 50%;
-    transition: transform 0.3s;
+.world-map{
+    display: block;        
+    width: 100%;
+    aspect-ratio: 784 / 459;
+    height: auto;
 }
-.map-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items:flex-start;
-    gap: 50px;
-    min-height: 70vh;
-    padding-top: 50px;
-}
-/*animaton flags*/
-.map-container a { animation: float 3s ease-in-out infinite; }
-.map-container a:nth-child(even) { animation-delay: 1s; }
-@keyframes float { 50% { transform: translateY(-10px); } }
-.map-container a:hover .map-image { transform: scale(1.5); }
 
 /* Weather Section */
 #weather {
