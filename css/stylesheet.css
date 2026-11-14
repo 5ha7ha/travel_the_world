@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Amarante&display=swap');
+
 
 :root{
     --bg: #DFF1F1;
@@ -14,14 +16,17 @@
 
 body{
     background-color: var(--bg);
-    font-family: "Alegreya Sans", "Segoe UI", sans-serif;
+    font-family: "Amarante", "Alegreya Sans", "Segoe UI", sans-serif;
     color: var(--panel-1);
+    margin: 0;
+    padding: 0;
 }
 
 #nav-brand {
     font-family: "Corinthia", cursive;
     font-weight: 500;
     font-size: 1.5rem;
+     line-height: 1;                    /* the script font has a tall line box */
 }
 .navbar-brand img {
     width: 32px;
@@ -34,6 +39,8 @@ body{
     --bs-navbar-color: var(--panel-1);
     --bs-navbar-hover-color: var(--firooze);
     --bs-navbar-active-color: var(--firooze);
+    --bs-navbar-padding-y: 0;          /* removes the top/bottom padding of the bar */
+    margin-bottom: 0;
 }
 .navbar .nav-link {
     position: relative;
@@ -57,11 +64,13 @@ body{
     margin: 0 auto;
 }
 #map h1{
+    font-family:  "Amarante", cursive;
     text-align: center;
     font-size: 2.5rem;
     margin: 0 0 10px;
 }
 #map p{
+    font-family:  "Amarante", cursive;
     text-align: center;
     font-size: 1.2rem;
     margin: 0 0 20px;
@@ -434,7 +443,7 @@ footer{
   color: var(--footer);
   text-align: center;
   padding: 1rem;
-  margin-top: 2rem;
+  margin-top: 0;
 }
 footer p { margin-bottom: 0.35rem; }
 footer p:last-child { margin-bottom: 0; }
@@ -536,12 +545,12 @@ footer .credits {
 
     #nav-brand {
         font-weight: 800;
-        font-size: 2.5rem;
+        font-size: 1.8rem;
     }
 
     .navbar-brand img {
-        width: 42px;
-        height: 42px;
+        width: 34px;
+        height: 34px;
     }
 
     .weather-grid {
