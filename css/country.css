@@ -150,6 +150,13 @@
 .spain  #uknow { background-image: url("../img/Spain/spain-uknow.jpg"); }
 .kazakhstan #uknow { background-image: url("../img/Kazakh/uknow-bg.jpg"); }
 .korea  #uknow { background-image: url("../img/Korea/korea-uknow.jpg"); }
+.canada  #uknow { background-image: url("../img/Canada/canada-uknow.jpg"); }
+.usa  #uknow { background-image: url("../img/USA/usa-uknow.jpg"); }
+.brazil  #uknow { background-image: url("../img/Brazil//brazil-uknow.avif"); }
+.saudi  #uknow { background-image: url("../img/Saudi/saudi-uknow.webp"); }
+.japan  #uknow { background-image: url("../img/Japan/japan-uknow.jpg"); }
+.germany  #uknow { background-image: url("../img/Germany/germany-uknow.jpg"); }
+.russia  #uknow { background-image: url("../img/Russia/russia-uknow.jpg"); }
 
 /* The facts, each with a coloured bar on the left */
 .country .facts-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
@@ -263,4 +270,33 @@
 
 @media (min-width: 1024px) {
   .flag-link img { width: 96px; height: 96px; }
+}
+
+/* under 900px: smaller flags in the picker and in "Visit another country" */
+@media (max-width: 900px) {
+  .flag-row {
+    gap: .75rem 1rem;
+    margin-top: 1rem;
+  }
+  .flag-link {
+    gap: .25rem;
+    font-size: .9rem;
+  }
+  .flag-link img {
+    width: 56px;
+    height: 56px;
+    border-width: 2px;
+  }
+  #more   { padding: 1.5rem 1rem 2rem; }
+  #picker { padding: 2rem 1rem; }
+}
+
+/* very small phones */
+@media (max-width: 480px) {
+  .flag-row  { gap: .6rem .75rem; }
+  .flag-link { font-size: .8rem; }
+  .flag-link img {
+    width: 46px;
+    height: 46px;
+  }
 }

@@ -53,6 +53,18 @@ body{
     background-color: #c6dede;
 }
 
+/* ----- navbar: the Log in / Profile links ----- */
+/* phone and tablet: the menu is vertical, so Log in / Sign up (or Profile / Log out) stack like the other links */
+#authNav {
+    display: flex;
+    flex-direction: column;
+}
+
+#authNav .nav-link {
+    font-family: inherit;
+    text-align: left;
+}
+
 /* map */
 #map{
     background-color: var(--firooze);
@@ -619,5 +631,13 @@ footer .credits {
 @media (min-width: 1300px){
     .world-map{
         max-width: none;       
+    }
+}
+
+/* laptop (992px and wider, where Bootstrap shows the menu in one row): put them side by side */
+@media (min-width: 992px) {
+    #authNav {
+        flex-direction: row;
+        flex-wrap: nowrap;
     }
 }

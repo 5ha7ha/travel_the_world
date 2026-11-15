@@ -1,0 +1,177 @@
+/* ===== DARK MODE =====
+   Load this file LAST on every page (after stylesheet.css, account.css, country.css, quiz.css, game.css).
+   Light mode is the normal CSS. Everything here applies only when <html data-theme="dark">.
+   First the CSS variables change, then the places where a color was written directly (white, #b9d6d6...). */
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+
+    --bg: #0f1c1d;            /* page background */
+    --panel-1: #e3f1f1;       /* main text (in light mode it is the dark teal) */
+    --firooze: #5bb5ba;       /* headings, links, prices: lighter so they are readable on dark */
+    --firooze-light: #00a6a6;
+    --mist: #162a2c;
+    --error: #f0707d;
+    --success: #4cc38a;
+
+    --card: #162a2c;          /* cards, panels, tickets */
+    --card-border: #2f5a5c;   /* dashed borders, inputs */
+}
+
+html[data-theme="dark"] body {
+    background-color: var(--bg);
+    color: var(--panel-1);
+    transition: background-color 0.25s, color 0.25s;
+}
+
+/* ----- navbar ----- */
+html[data-theme="dark"] .navbar .nav-link.active { background-color: #1f3a3c; }
+html[data-theme="dark"] .navbar-toggler { border-color: var(--card-border); }
+html[data-theme="dark"] .navbar-toggler-icon { filter: invert(1); }
+
+.theme-toggle {
+    background: none;
+    border: 0;
+    font-family: inherit;
+    cursor: pointer;
+}
+.theme-toggle:focus-visible {
+    outline: 3px solid var(--firooze-light);
+    outline-offset: 2px;
+}
+
+/* ----- footer: its background used --panel-1, which is now light ----- */
+html[data-theme="dark"] footer { background: #081213; }
+
+/* ----- cards ----- */
+html[data-theme="dark"] .plan-card,
+html[data-theme="dark"] .stamp,
+html[data-theme="dark"] .weather-card,
+html[data-theme="dark"] .search-card,
+html[data-theme="dark"] .game-card,
+html[data-theme="dark"] .quiz-card,
+html[data-theme="dark"] .ticket-small {
+    background: var(--card);
+    color: var(--panel-1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="dark"] .weather-card h3 { color: var(--firooze); }
+
+/* ----- notes ----- */
+html[data-theme="dark"] .note,
+html[data-theme="dark"] .auth-card .note {
+    background-color: rgba(22, 42, 44, 0.85);
+    color: var(--panel-1);
+}
+html[data-theme="dark"] .notice-error {
+    background-color: #3a1a1f;
+    border-left-color: var(--error);
+}
+
+/* ----- forms (Bootstrap is dark through data-bs-theme, we only fix our borders) ----- */
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] .form-select {
+    background-color: #0f1c1d;
+    color: var(--panel-1);
+    border-color: var(--card-border);
+}
+html[data-theme="dark"] .form-control::placeholder { color: #7f9a9b; }
+html[data-theme="dark"] .form-control:hover,
+html[data-theme="dark"] .form-select:hover { border-color: var(--firooze-light); }
+html[data-theme="dark"] .form-control.is-invalid,
+html[data-theme="dark"] .form-select.is-invalid { border-color: var(--error); }
+html[data-theme="dark"] .form-control.is-valid,
+html[data-theme="dark"] .form-select.is-valid { border-color: var(--success); }
+
+/* ----- buttons: keep the dark teal with white text, the light accent would be too pale ----- */
+html[data-theme="dark"] .plan-btn {
+    background: #2f6f73;
+    border-color: #2f6f73;
+    color: #fff;
+}
+html[data-theme="dark"] .plan-btn:hover {
+    background: var(--firooze-light);
+    border-color: var(--firooze-light);
+}
+html[data-theme="dark"] .plan-btn-outline {
+    border-color: var(--firooze);
+    color: var(--firooze);
+}
+html[data-theme="dark"] .plan-btn-outline:hover {
+    background: #2f6f73;
+    border-color: #2f6f73;
+    color: #fff;
+}
+
+/* ----- plan page and profile ----- */
+html[data-theme="dark"] .summary-list div,
+html[data-theme="dark"] .profile-list div,
+html[data-theme="dark"] .ticket-small,
+html[data-theme="dark"] .tickets-empty {
+    border-color: var(--card-border);
+}
+html[data-theme="dark"] .ticket-remove { border-color: var(--card-border); }
+html[data-theme="dark"] .ticket-remove:hover { background: #3a1a1f; }
+
+/* ----- search ----- */
+html[data-theme="dark"] .search-badge,
+html[data-theme="dark"] .search-card a { color: var(--firooze); }
+
+/* ----- games ----- */
+html[data-theme="dark"] #game {
+    --game-bg: #17302f;
+    --game-text: #e3f1f1;
+    --game-accent-dark: #7fd0d4;
+}
+html[data-theme="dark"] .game-btn { color: #fff; background: #2f6f73; }
+html[data-theme="dark"] .game-btn:hover:not(:disabled) { background: #1d5c68; }
+html[data-theme="dark"] .game-btn:disabled { background: #3a4a4c; color: #9aa8ab; }
+html[data-theme="dark"] .game-restart { background: transparent; color: var(--game-accent-dark); }
+html[data-theme="dark"] .game-message.correct { color: var(--success); }
+html[data-theme="dark"] .game-message.wrong { color: var(--error); }
+
+/* ----- quiz ----- */
+html[data-theme="dark"] .quiz-card { --accent: #5bb5ba; --mist: #1f3a3c; }
+html[data-theme="dark"] .quiz-option,
+html[data-theme="dark"] .quiz-btn {
+    background: #0f1c1d;
+    color: var(--panel-1);
+}
+html[data-theme="dark"] .quiz-option:hover,
+html[data-theme="dark"] .quiz-btn:hover { background: #1f3a3c; }
+html[data-theme="dark"] .quiz-btn-main { background: #2f6f73; color: #fff; }
+html[data-theme="dark"] .quiz-option.correct { background: #1f7a4d; color: #fff; }
+html[data-theme="dark"] .quiz-option.wrong { background: #8b1e2d; color: #fff; }
+html[data-theme="dark"] .quiz-option:focus,
+html[data-theme="dark"] .quiz-btn:focus { outline-color: #fff; }
+html[data-theme="dark"] .quiz-feedback.success,
+html[data-theme="dark"] .quiz-result.win h3 { color: var(--success); }
+html[data-theme="dark"] .quiz-feedback.error,
+html[data-theme="dark"] .quiz-result.loss h3 { color: var(--error); }
+html[data-theme="dark"] .quiz-feedback.info { color: #e0b252; }
+
+/* ----- country pages: these pages define their own variables on .country ----- */
+html[data-theme="dark"] .country {
+    --text: #ece6e5;
+    --text-muted: #b6adac;
+    --paper: #14181a;
+    --mist: #1d2326;
+}
+html[data-theme="dark"] .country #uknow::before { background: rgba(15, 20, 22, 0.75); }
+html[data-theme="dark"] .country .visit-card { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5); }
+html[data-theme="dark"] .country .visit-card:hover { box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); }
+html[data-theme="dark"] .flag-link img { box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); }
+
+/* ----- home page: the map section ----- */
+html[data-theme="dark"] #map { background-color: #0d2733; }   /* darker blue instead of the teal */
+
+/* An embedded map (<object>, <embed>, <iframe>) is a separate document that is "light".
+   When the page is dark, the browser gives that document an opaque white background: the white square.
+   Telling the map element that it is light makes its background transparent again. */
+html[data-theme="dark"] .world-map,
+html[data-theme="dark"] #map object,
+html[data-theme="dark"] #map embed,
+html[data-theme="dark"] #map iframe {
+    color-scheme: light;
+}

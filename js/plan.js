@@ -1,7 +1,17 @@
 // ===== DATA =====
-// the countries come from js/data.js
-// price per person per day in US dollars (Budget style), by country key
-const dailyCost = { yemen: 50, spain: 110, kazakhstan: 70, korea: 100 };
+// the countries come from js/data.js (each country has a costTier: 1 = cheap ... 4 = expensive)
+// auth.js (loaded before this file) gives us getCurrentUser() and addTicket()
+
+// price per person per day in US dollars (Budget style) for each cost tier
+const tierPrices = { 1: 50, 2: 70, 3: 100, 4: 140 };
+const DEFAULT_TIER = 2;          // used when a country has no costTier, so the price is never NaN
+
+const PEAK_MONTHS = [5, 6, 7, 11];   // Jun, Jul, Aug, Dec (month numbers start at 0)
+const PEAK_EXTRA = 0.15;             // +15% in peak season
+const GROUP_MIN = 4;                 // 4 or more travelers
+const GROUP_DISCOUNT = 0.10;         // -10%
+const LONG_MIN = 10;                 // 10 or more days
+const LONG_DISCOUNT = 0.05;          // -5%
 
 const styles = [
     { key: "budget",  name: "Budget",  multiplier: 1 },
@@ -21,6 +31,30 @@ const fields = {
     days:        document.getElementById("days"),
     travelers:   document.getElementById("travelers")
 };
+const loginNotice = document.getElementById("loginNotice");
+
+// ===== HELPERS =====
+function findByKey(list, key) {
+    for (let i = 0; i < list.length; i++) {
+        if (list[i].key === key) {
+            return list[i];
+        }
+    }
+    return null;
+}
+
+// "2026-11-10" -> a Date at local midnight (not UTC)
+function parseLocalDate(value) {
+    const parts = value.split("-").map(Number);
+    return new Date(parts[0], parts[1] - 1, parts[2]); //month - 1 converts it to the 0-based index that Date expects.
+}
+
+// the start date cannot be today or in the past
+function toDateString(date) {
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return date.getFullYear() + "-" + m + "-" + d;
+}
 
 // ===== FILL THE SELECTS FROM THE ARRAYS =====
 function fillSelect(select, items) {
@@ -41,31 +75,41 @@ if (findByKey(countries, preselected) !== null) {
     fields.destination.value = preselected;
 }
 
-// the start date cannot be today or in the past
-function toDateString(date) {
-    const m = String(date.getMonth() + 1).padStart(2, "0");
-    const d = String(date.getDate()).padStart(2, "0");
-    return date.getFullYear() + "-" + m + "-" + d;
-}
-
 const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
 fields.startDate.min = toDateString(tomorrow);
 
-// ===== HELPERS =====
-function findByKey(list, key) {
-    for (let i = 0; i < list.length; i++) {
-        if (list[i].key === key) {
-            return list[i];
-        }
-    }
-    return null;
+// ===== LOGGED-IN USER: PREFILL AND NOTICE =====
+// puts the name, email and phone of the logged-in user into the form
+function prefillUser() {
+    const user = getCurrentUser();
+    if (user === null) return;
+    fields.fullName.value = user.fullName;
+    fields.email.value = user.email;
+    fields.phone.value = user.phone;
 }
 
-// "2026-11-10" -> a Date at local midnight (not UTC)
-function parseLocalDate(value) {
-    const parts = value.split("-").map(Number);
-    return new Date(parts[0], parts[1] - 1, parts[2]);
+// the message above the form: "Booking as ..." or "Log in to book"
+function showLoginNotice(message) {
+    const user = getCurrentUser();
+    loginNotice.textContent = "";
+
+    if (message !== undefined) {
+        loginNotice.append(message + " ");
+    } else if (user !== null) {
+        loginNotice.append("Booking as " + user.fullName + ". Your ticket will be saved in your profile.");
+        return;
+    } else {
+        loginNotice.append("You can plan a trip and see the cost, but you need an account to book it. ");
+    }
+
+    const login = document.createElement("a");
+    login.href = "login.html";
+    login.textContent = "Log in";
+    const signup = document.createElement("a");
+    signup.href = "signup.html";
+    signup.textContent = "Sign up";
+    loginNotice.append(login, " or ", signup, ".");
 }
 
 // ===== VALIDATION RULES =====
@@ -142,11 +186,38 @@ function validateAll() {
 }
 
 // ===== COST AND SUMMARY =====
-function calculateTotal(destination, style, days, travelers) {
+// price per person per day (Budget style): it comes from the cost tier of the country
+function getDailyPrice(destination) {
+    const tier = destination.costTier in tierPrices ? destination.costTier : DEFAULT_TIER;
+    return tierPrices[tier];
+}
+
+// season, group and long-trip rules. Returns the factor and a short text for each rule that applied
+function getAdjustments(startDate, days, travelers) {
+    let factor = 1;
+    const labels = [];
+
+    if (startDate !== "" && PEAK_MONTHS.includes(parseLocalDate(startDate).getMonth())) {
+        factor = factor * (1 + PEAK_EXTRA);
+        labels.push("Peak season +" + Math.round(PEAK_EXTRA * 100) + "%");
+    }
+    if (travelers >= GROUP_MIN) {
+        factor = factor * (1 - GROUP_DISCOUNT);
+        labels.push("Group discount -" + Math.round(GROUP_DISCOUNT * 100) + "%");
+    }
+    if (days >= LONG_MIN) {
+        factor = factor * (1 - LONG_DISCOUNT);
+        labels.push("Long trip discount -" + Math.round(LONG_DISCOUNT * 100) + "%");
+    }
+    return { factor: factor, labels: labels };
+}
+
+function calculateTotal(destination, style, days, travelers, startDate) {
     if (!destination || !style || days < 1 || travelers < 1) {
         return 0;
     }
-    return Math.round(dailyCost[destination.key] * style.multiplier * days * travelers);
+    const adjust = getAdjustments(startDate, days, travelers);
+    return Math.round(getDailyPrice(destination) * style.multiplier * days * travelers * adjust.factor);
 }
 
 function formatDate(value) {
@@ -159,15 +230,16 @@ function updateSummary() {
     const style = findByKey(styles, fields.tripStyle.value);
     const days = Number(fields.days.value) || 0;
     const travelers = Number(fields.travelers.value) || 0;
+    const startDate = fields.startDate.value;
 
     document.getElementById("sumDestination").textContent = destination ? destination.name : "-";
     document.getElementById("sumStyle").textContent = style ? style.name : "-";
     document.getElementById("sumTravelers").textContent = travelers > 0 ? travelers : "-";
 
     // dates: start date and the last day of the trip
-    let dates = formatDate(fields.startDate.value);
-    if (fields.startDate.value !== "" && days > 0) {
-        const end = parseLocalDate(fields.startDate.value);
+    let dates = formatDate(startDate);
+    if (startDate !== "" && days > 0) {
+        const end = parseLocalDate(startDate);
         end.setDate(end.getDate() + days - 1);
         dates = dates + " to " + formatDate(toDateString(end));
     }
@@ -187,8 +259,12 @@ function updateSummary() {
         emptyText.hidden = false;
     }
 
-    const total = calculateTotal(destination, style, days, travelers);
+    const total = calculateTotal(destination, style, days, travelers, startDate);
     document.getElementById("sumTotal").textContent = "$" + total.toLocaleString("en-US");
+
+    // which price rules were applied
+    const adjust = getAdjustments(startDate, days, travelers);
+    document.getElementById("sumRules").textContent = total > 0 ? adjust.labels.join(" · ") : "";
 }
 
 // ===== EVENTS =====
@@ -221,31 +297,63 @@ form.addEventListener("submit", function (event) {
         return;
     }
 
-    showSuccess();
+    // only a logged-in user can book, because the ticket is saved in the profile
+    const user = getCurrentUser();
+    if (user === null) {
+        showLoginNotice("Please log in to book your trip.");
+        loginNotice.classList.add("notice-error");
+        loginNotice.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+    }
+
+    showSuccess(user);
 });
 
-// ===== SUCCESS MESSAGE (jQuery) =====
-function showSuccess() {
+// ===== SAVE THE TICKET AND SHOW THE BIG TICKET (jQuery) =====
+function showSuccess(user) {
     const destination = findByKey(countries, fields.destination.value);
     const style = findByKey(styles, fields.tripStyle.value);
     const days = Number(fields.days.value);
     const travelers = Number(fields.travelers.value);
-    const total = calculateTotal(destination, style, days, travelers);
+    const startDate = fields.startDate.value;
+    const total = calculateTotal(destination, style, days, travelers, startDate);
 
+    // the small ticket for the profile page (the id is added by addTicket)
+    const ticket = addTicket({
+        owner: user.email,
+        destination: destination.key,
+        styleName: style.name,
+        startDate: startDate,
+        days: days,
+        travelers: travelers,
+        total: total
+    });
+
+    if (ticket === null) {
+        showLoginNotice("Your browser blocked saving data, so the ticket was not saved. Allow site data and try again.");
+        loginNotice.classList.add("notice-error");
+        return;
+    }
+    loginNotice.classList.remove("notice-error");
+
+    // the big ticket
     document.getElementById("stampFlag").src = destination.flag;
     document.getElementById("stampFlag").alt = "Flag of " + destination.name;
+    document.getElementById("stampId").textContent = "Ticket " + ticket.id;
     document.getElementById("stampText").textContent =
-        "Thank you, " + fields.fullName.value.trim().split(" ")[0] + "! " +
-        days + " days in " + destination.name + " for " + travelers +
-        (travelers === 1 ? " traveler" : " travelers") + ". Estimated cost: $" + total.toLocaleString("en-US") + ".";
+        "Thank you, " + user.fullName.trim().split(" ")[0] + "! " +
+        days + (days === 1 ? " day" : " days") + " in " + destination.name + " for " + travelers +
+        (travelers === 1 ? " traveler" : " travelers") + ", from " + formatDate(startDate) +
+        ". Estimated cost: $" + total.toLocaleString("en-US") + ".";
     document.getElementById("stampLink").href = destination.page;
 
-    // clear the form and the summary
+    // clear the form and the summary, then fill the user's details again
     form.reset();
     for (const name in fields) {
         fields[name].classList.remove("is-valid", "is-invalid");
         document.getElementById(name + "Error").textContent = "";
     }
+    prefillUser();
     updateSummary();
 
     // .stop(true, true) prevents the effects from piling up on fast repeated clicks
@@ -256,8 +364,10 @@ function showSuccess() {
 $("#againBtn").on("click", function () {
     $("#successBox").stop(true, true).slideUp(300);
     $("html, body").stop(true).animate({ scrollTop: 0 }, 400);
-    fields.fullName.focus();
+    fields.destination.focus();
 });
 
 // ===== START =====
-updateSummary();
+prefillUser();
+showLoginNotice();
+updateSummary
