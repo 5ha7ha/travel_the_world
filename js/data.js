@@ -7,6 +7,7 @@
 const countries = [
     {
         key: "yemen",
+        costTier: 1,
         name: "Yemen",
         capital: "Sana'a City",
         languages: ["Arabic"],
@@ -28,6 +29,7 @@ const countries = [
     },
     {
         key: "spain",
+        costTier: 3,
         name: "Spain",
         capital: "Madrid",
         languages: ["Spanish"],
@@ -49,6 +51,7 @@ const countries = [
     },
     {
         key: "kazakhstan",
+        costTier: 2,
         name: "Kazakhstan",
         capital: "Astana",
         languages: ["Kazakh", "Russian"],
@@ -70,6 +73,7 @@ const countries = [
     },
     {
         key: "korea",
+        costTier: 3,
         name: "Korea",
         capital: "Seoul",
         languages: ["Korean"],
@@ -91,6 +95,7 @@ const countries = [
     },
         {
         key: "japan",
+        costTier: 3,
         name: "Japan",
         capital: "Tokyo",
         languages: ["Japanese"],
@@ -112,6 +117,7 @@ const countries = [
     },
     {
         key: "germany",
+        costTier: 4,
         name: "Germany",
         capital: "Berlin",
         languages: ["German"],
@@ -133,6 +139,7 @@ const countries = [
     },
     {
         key: "usa",
+        costTier: 4,
         name: "United States",
         capital: "Washington, D.C.",
         languages: ["English"],
@@ -154,6 +161,7 @@ const countries = [
     },
     {
         key: "canada",
+        costTier: 4,
         name: "Canada",
         capital: "Ottawa",
         languages: ["English", "French"],
@@ -175,6 +183,7 @@ const countries = [
     },
         {
         key: "russia",
+        costTier: 2,
         name: "Russia",
         capital: "Moscow",
         languages: ["Russian"],
@@ -196,6 +205,7 @@ const countries = [
     },
     {
         key: "brazil",
+        costTier: 2,
         name: "Brazil",
         capital: "Brasília",
         languages: ["Portuguese"],
@@ -217,6 +227,7 @@ const countries = [
     },
     {
         key: "saudi",
+        costTier: 3,
         name: "Saudi Arabia",
         capital: "Riyadh",
         languages: ["Arabic"],
