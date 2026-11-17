@@ -257,6 +257,52 @@ const countries = [
             "The Empty Quarter (Rub' al Khali) is one of the largest continuous sand deserts in the world and stretches across the south of the country.",
             "Hegra in AlUla, with its tombs carved into rock, was the first place in Saudi Arabia to become a UNESCO World Heritage Site, in 2008."
         ]
+    },
+        {
+        key: "egypt",
+        costTier: 1,
+        name: "Egypt",
+        capital: "Cairo",
+        languages: ["Arabic"],
+        currency: "Egyptian Pound",
+        population: 112,
+        lat: 30.04, lon: 31.24,
+        flag: "img/Egypt/egyptFlag.jpeg",
+        map: "img/Egypt/egypt-map-bg.svg",
+        page: "country.html?c=egypt",
+        accent: "#ce1126",
+        heroBg: "#1a1512",
+        heroGlow: "rgba(200, 160, 60, 0.4)",
+        quote: { text: "\"الصبر مفتاح الفرج\"", lang: "ar", dir: "rtl" },
+        facts: [
+            "The Great Pyramid of Giza was built about 4,500 years ago and was the tallest human-made structure in the world for more than 3,800 years.",
+            "The Nile, one of the longest rivers on Earth, runs through the whole country, and most Egyptians live along its banks.",
+            "Al-Azhar in Cairo was founded around 970 and is one of the oldest universities in the world.",
+            "The Suez Canal, opened in 1869, connects the Mediterranean Sea to the Red Sea and saves ships a long trip around Africa."
+        ]
+    },
+    {
+        key: "morocco",
+        costTier: 2,
+        name: "Morocco",
+        capital: "Rabat",
+        languages: ["Arabic", "Amazigh"],
+        currency: "Dirham",
+        population: 38,
+        lat: 34.02, lon: -6.83,
+        flag: "img/Morocco/moroccoFlag.png",
+        map: "img/Morocco/morocco-map-bg.webp",
+        page: "country.html?c=morocco",
+        accent: "#c1272d",
+        heroBg: "#14201a",
+        heroGlow: "rgba(0, 98, 51, 0.45)",
+        quote: { text: "\"في التأني السلامة وفي العجلة الندامة\"", lang: "ar", dir: "rtl" },
+        facts: [
+            "The University of al-Qarawiyyin in Fez was founded in 859 by Fatima al-Fihri and is often called the oldest university in the world that is still running.",
+            "Morocco was the first African team to reach the World Cup semi-finals, in 2022.",
+            "The old medina of Fez is one of the largest car-free urban areas in the world, with thousands of narrow lanes.",
+            "The town of Chefchaouen is famous for its streets and houses painted in shades of blue."
+        ]
     }
 ];
 
@@ -304,7 +350,15 @@ const dishes = [
 
     { country: "saudi", name: "Kabsa", description: "The most famous dish of the country: spiced rice cooked with chicken or lamb, often topped with nuts and raisins.", image: "img/Saudi/kabsa.jpg" },
     { country: "saudi", name: "Mutabbaq", description: "A stuffed, folded pan-fried pastry filled with minced meat, egg and spices, a popular street food.", image: "img/Saudi/mutabbaq.jpg" },
-    { country: "saudi", name: "Jareesh", description: "A creamy dish of crushed wheat cooked with meat or chicken and spices, eaten especially in the Najd region.", image: "img/Saudi/jareesh.avif" }
+    { country: "saudi", name: "Jareesh", description: "A creamy dish of crushed wheat cooked with meat or chicken and spices, eaten especially in the Najd region.", image: "img/Saudi/jareesh.avif" },
+
+    { country: "egypt", name: "Koshari", description: "A hearty street food of rice, lentils, macaroni and chickpeas, topped with tomato sauce and crispy fried onions.", image: "img/Egypt/koshari.jpeg" },
+    { country: "egypt", name: "Ful Medames", description: "Slow-cooked fava beans with oil, lemon and cumin, eaten for breakfast with warm bread.", image: "img/Egypt/ful-medames.jpeg" },
+    { country: "egypt", name: "Molokhia", description: "A green soup made from finely chopped jute leaves with garlic, usually served with rice and chicken.", image: "img/Egypt/molokhia.webp" },
+
+    { country: "morocco", name: "Tagine", description: "A slow-cooked stew of meat, vegetables and spices, named after the cone-shaped clay pot it is made in.", image: "img/Morocco/tagine.jpeg" },
+    { country: "morocco", name: "Couscous", description: "Steamed semolina grains served with vegetables and meat, traditionally eaten on Fridays.", image: "img/Morocco/couscous.jpeg" },
+    { country: "morocco", name: "Pastilla", description: "A thin, flaky pie filled with spiced chicken or pigeon, with a sweet dusting of sugar and cinnamon on top.", image: "img/Morocco/pastilla.jpg" }
 ];
 
 // ===== PLACES (3 places for every country) =====
@@ -351,5 +405,13 @@ const places = [
 
     { country: "saudi", name: "AlUla", description: "A desert valley with sandstone cliffs and Hegra, an ancient Nabataean city with tombs carved into the rock.", image: "img/Saudi/alula.avif" },
     { country: "saudi", name: "Makkah", description: "The holiest city in Islam, home to the Kaaba inside Masjid al-Haram. Millions of Muslims travel here every year for Hajj and Umrah.", image: "img/Saudi/makkah.jpg" },
-    { country: "saudi", name: "Edge of the World", description: "A dramatic cliff edge near Riyadh, part of the Tuwaiq Escarpment, with views over a vast plain that seems to have no end.", image: "img/Saudi/edge-of-the-world.jpg" }
+    { country: "saudi", name: "Edge of the World", description: "A dramatic cliff edge near Riyadh, part of the Tuwaiq Escarpment, with views over a vast plain that seems to have no end.", image: "img/Saudi/edge-of-the-world.jpg" },
+
+    { country: "egypt", name: "Pyramids of Giza", description: "The last of the Seven Wonders of the Ancient World still standing, next to the Great Sphinx on the edge of Cairo.", image: "img/Egypt/giza.jpg" },
+    { country: "egypt", name: "Luxor", description: "Often called the world's greatest open-air museum, with Karnak Temple and the Valley of the Kings across the Nile.", image: "img/Egypt/luxor.jpg" },
+    { country: "egypt", name: "Alexandria", description: "A Mediterranean port city founded by Alexander the Great, with a seaside promenade and the modern Bibliotheca Alexandrina.", image: "img/Egypt/alexandria.webp" },
+
+    { country: "morocco", name: "Marrakech", description: "A city of red walls, colorful souks and the Jemaa el-Fnaa square, which fills with food stalls and storytellers at night.", image: "img/Morocco/marrakech.webp" },
+    { country: "morocco", name: "Chefchaouen", description: "A calm mountain town where almost every wall, door and staircase is painted blue.", image: "img/Morocco/chefchaouen.webp" },
+    { country: "morocco", name: "Merzouga Sahara", description: "Huge golden dunes at the edge of the Sahara, where you can ride a camel at sunset and sleep in a desert camp.", image: "img/Morocco/merzouga.jpg" }
 ];

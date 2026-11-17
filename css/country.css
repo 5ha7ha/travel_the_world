@@ -157,6 +157,8 @@
 .japan  #uknow { background-image: url("../img/Japan/japan-uknow.jpg"); }
 .germany  #uknow { background-image: url("../img/Germany/germany-uknow.jpg"); }
 .russia  #uknow { background-image: url("../img/Russia/russia-uknow.jpg"); }
+.egypt  #uknow { background-image: url("../img/Egypt/egypt-uknow.jpeg"); }
+.morocco  #uknow { background-image: url("../img/Morocco/moroco-unkow.jpeg"); }
 
 /* The facts, each with a coloured bar on the left */
 .country .facts-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
