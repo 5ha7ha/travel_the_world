@@ -2,7 +2,7 @@ const START_LIVES = 3;
 const START_HINTS = 1;       // thid for 50/50 hint
 const WRONG_TO_REMOVE = 2;   // how many wrong answers 50/50 removes
 
-const QUESTIONS = [
+const QUESTION_BANK = [
   {
     country: "Yemen",  
     text: "Which Yemeni port gave its name to a coffee flavor?",
@@ -61,6 +61,104 @@ const QUESTIONS = [
     options: ["San Fermín", "Las Fallas", "Semana Santa", "La Tomatina"],
     correct: 3,
     fact: "La Tomatina takes place every year in the town of Buñol."
+  },
+  {
+    country: "Japan",
+    text: "Which Japanese high-speed train, opened in 1964, is famous for being punctual?",
+    options: ["Eurostar", "Shinkansen", "TGV", "Acela"],
+    correct: 1,
+    fact: "The average delay of the Shinkansen is under one minute."
+  },
+  {
+    country: "Japan",
+    text: "Which city was the capital of Japan for over a thousand years before Tokyo?",
+    options: ["Osaka", "Nara", "Nagoya", "Kyoto"],
+    correct: 3,
+    fact: "The capital moved from Kyoto to Tokyo in 1868."
+  },
+  {
+    country: "Germany",
+    text: "In which year did the Berlin Wall fall?",
+    options: ["1961", "1979", "1989", "1991"],
+    correct: 2,
+    fact: "The wall divided Berlin for 28 years and fell on November 9."
+  },
+  {
+    country: "Germany",
+    text: "Who invented the movable-type printing press in Mainz around 1440?",
+    options: ["Johannes Gutenberg", "Karl Benz", "Albert Einstein", "Martin Luther"],
+    correct: 0,
+    fact: "His press changed how books were made across Europe."
+  },
+  {
+    country: "USA",
+    text: "Which was the first national park in the world, created in 1872?",
+    options: ["Yosemite", "Grand Canyon", "Yellowstone", "Zion"],
+    correct: 2,
+    fact: "Yellowstone is famous for the Old Faithful geyser."
+  },
+  {
+    country: "USA",
+    text: "Which country gave the Statue of Liberty to the United States?",
+    options: ["United Kingdom", "France", "Spain", "Italy"],
+    correct: 1,
+    fact: "It was dedicated in New York Harbor in 1886."
+  },
+  {
+    country: "Canada",
+    text: "What is the capital of Canada?",
+    options: ["Toronto", "Montreal", "Vancouver", "Ottawa"],
+    correct: 3,
+    fact: "In winter the Rideau Canal in Ottawa becomes a giant skating rink."
+  },
+  {
+    country: "Canada",
+    text: "Which Canadian province makes most of the world's maple syrup?",
+    options: ["Quebec", "Ontario", "Alberta", "Manitoba"],
+    correct: 0,
+    fact: "The vast majority of Canada's maple syrup is made in Quebec."
+  },
+  {
+    country: "Russia",
+    text: "Which Siberian lake is the deepest lake on Earth?",
+    options: ["Lake Ladoga", "Lake Baikal", "Lake Onega", "Lake Victoria"],
+    correct: 1,
+    fact: "Lake Baikal is about 1,640 meters deep."
+  },
+  {
+    country: "Russia",
+    text: "What was the first artificial satellite, launched in 1957?",
+    options: ["Vostok 1", "Explorer 1", "Sputnik 1", "Luna 1"],
+    correct: 2,
+    fact: "Sputnik 1 was launched by the Soviet Union."
+  },
+  {
+    country: "Brazil",
+    text: "Which rainforest covers about 60% of Brazil's territory?",
+    options: ["Amazon", "Congo", "Daintree", "Valdivian"],
+    correct: 0,
+    fact: "The Amazon is the largest tropical rainforest on Earth."
+  },
+  {
+    country: "Brazil",
+    text: "Which city was built from scratch in the late 1950s to become Brazil's capital?",
+    options: ["Rio de Janeiro", "São Paulo", "Salvador", "Brasília"],
+    correct: 3,
+    fact: "Brasília was inaugurated in 1960."
+  },
+  {
+    country: "Saudi Arabia",
+    text: "Which two cities are the holiest in Islam, both in Saudi Arabia?",
+    options: ["Riyadh and Jeddah", "Makkah and Jeddah", "Makkah and Madinah", "Madinah and Taif"],
+    correct: 2,
+    fact: "Millions of pilgrims visit them every year."
+  },
+  {
+    country: "Saudi Arabia",
+    text: "Which ancient city in AlUla, with tombs carved into the rock, is a UNESCO site?",
+    options: ["Petra", "Hegra", "Palmyra", "Persepolis"],
+    correct: 1,
+    fact: "Hegra was the first place in Saudi Arabia to become a UNESCO World Heritage Site."
   }
 ];
 
@@ -79,6 +177,22 @@ const nextBtn = document.getElementById("quiz-next");
 const quizRestartBtn = document.getElementById("quiz-restart");      
 const resultTitle = document.getElementById("quiz-result-title");
 const resultText = document.getElementById("quiz-result-text");
+
+// ====================================================
+const QUIZ_LENGTH = 8;       // how many questions one game has
+let QUESTIONS = [];          // the questions of the current game (filled by pickQuestions)
+
+// mixes a copy of the bank and takes the first 8
+function pickQuestions() {
+    const copy = QUESTION_BANK.slice();                  // a copy, so the bank itself is never changed
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = getRandomInt(0, i);                    // a random place from 0 to i
+        const temp = copy[i];                            // swap the two questions
+        copy[i] = copy[j];
+        copy[j] = temp;
+    }
+    return copy.slice(0, QUIZ_LENGTH);
+}
 
 // ===================== GAME STATE =====================
 let state;
@@ -269,6 +383,7 @@ function nextStep() {
 }
 
 function restart() {
+  QUESTIONS = pickQuestions();     // NEW: a fresh set of 8
   state = newState();
   render();
   optionsBox.querySelector("button").focus();
@@ -288,5 +403,6 @@ nextBtn.addEventListener("click", nextStep);
 quizRestartBtn.addEventListener("click", restart);   
 
 // ===================== START =====================
+QUESTIONS = pickQuestions();       // NEW
 state = newState();
 render();
