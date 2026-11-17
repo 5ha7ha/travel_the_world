@@ -41,68 +41,69 @@
                 </div>
             </div>
         </nav>
-        <section id="map">
-            <h1>Where to travel?</h1>
-            <p>Pick a flag to start your trip!</p>
-            <div class="map-container">
-                <object data="img/world-map.svg" type="image/svg+xml" class="world-map" aria-label="World map: click a colored country"></object>
+        <main>
+            <section id="map">
+                <h1>Where to travel?</h1>
+                <p>Pick a flag to start your trip!</p>
+                <div class="map-container">
+                    <object data="img/world-map.svg" type="image/svg+xml" class="world-map" aria-label="World map: click a colored country"></object>
 
-                <div class="flag-list">
-                    <a href="country.html?c=yemen"><img src="img/Yemen/yemenFlag.png" alt="Yemen" class="map-image"></a>
-                    <a href="country.html?c=spain"><img src="img/Spain/spainFlag.png" alt="Spain" class="map-image"></a>
-                    <a href="country.html?c=kazakhstan"><img src="img/Kazakh/Flag-Kazakhstan.webp" alt="Kazakhstan" class="map-image"></a>
-                    <a href="country.html?c=korea"><img src="img/Korea/koreaFlag.jpg" alt="Korea" class="map-image"></a>
-                    <a href="country.html?c=brazil"><img src="img/Brazil/brazilFlag.webp" alt="Brazil" class="map-image"></a>
-                    <a href="country.html?c=canada"><img src="img/Canada/canadaFlag.png" alt="Canada" class="map-image"></a>
-                    <a href="country.html?c=germany"><img src="img/Germany/germanyFlag.webp" alt="Germany" class="map-image"></a>
-                    <a href="country.html?c=japan"><img src="img/Japan/japanFlag.webp" alt="Japan" class="map-image"></a>
-                    <a href="country.html?c=russia"><img src="img/Russia/russiaFlag.webp" alt="Russia" class="map-image"></a>
-                    <a href="country.html?c=saudi"><img src="img/Saudi/saudiFlag.webp" alt="Saudi Arabia" class="map-image"></a>
-                    <a href="country.html?c=usa"><img src="img/USA/usaFlag.webp" alt="USA" class="map-image"></a>
+                    <div class="flag-list">
+                        <a href="country.html?c=yemen"><img src="img/Yemen/yemenFlag.png" alt="Yemen" class="map-image"></a>
+                        <a href="country.html?c=spain"><img src="img/Spain/spainFlag.png" alt="Spain" class="map-image"></a>
+                        <a href="country.html?c=kazakhstan"><img src="img/Kazakh/Flag-Kazakhstan.webp" alt="Kazakhstan" class="map-image"></a>
+                        <a href="country.html?c=korea"><img src="img/Korea/koreaFlag.jpg" alt="Korea" class="map-image"></a>
+                        <a href="country.html?c=brazil"><img src="img/Brazil/brazilFlag.webp" alt="Brazil" class="map-image"></a>
+                        <a href="country.html?c=canada"><img src="img/Canada/canadaFlag.png" alt="Canada" class="map-image"></a>
+                        <a href="country.html?c=germany"><img src="img/Germany/germanyFlag.webp" alt="Germany" class="map-image"></a>
+                        <a href="country.html?c=japan"><img src="img/Japan/japanFlag.webp" alt="Japan" class="map-image"></a>
+                        <a href="country.html?c=russia"><img src="img/Russia/russiaFlag.webp" alt="Russia" class="map-image"></a>
+                        <a href="country.html?c=saudi"><img src="img/Saudi/saudiFlag.webp" alt="Saudi Arabia" class="map-image"></a>
+                        <a href="country.html?c=usa"><img src="img/USA/usaFlag.webp" alt="USA" class="map-image"></a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="search">
-            <h2>Search dishes and places</h2>
+            <section id="search">
+                <h2>Search dishes and places</h2>
 
-            <div class="search-bar">
-                <div class="search-field">
-                    <label for="searchInput" class="form-label">What are you looking for?</label>
-                    <input type="search" class="form-control" id="searchInput" placeholder="Try paella, canyon, Korea...">
+                <div class="search-bar">
+                    <div class="search-field">
+                        <label for="searchInput" class="form-label">What are you looking for?</label>
+                        <input type="search" class="form-control" id="searchInput" placeholder="Try paella, canyon, Korea...">
+                    </div>
+                    <div class="search-field">
+                        <label for="searchType" class="form-label">Show</label>
+                        <select class="form-select" id="searchType">
+                            <option value="all">Everything</option>
+                            <option value="Food">Food</option>
+                            <option value="Place">Places</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="search-field">
-                    <label for="searchType" class="form-label">Show</label>
-                    <select class="form-select" id="searchType">
-                        <option value="all">Everything</option>
-                        <option value="Food">Food</option>
-                        <option value="Place">Places</option>
-                    </select>
-                </div>
-            </div>
 
-            <p id="searchCount" class="search-count" aria-live="polite"></p>
-            <div id="searchResults" class="search-results"></div>
-        </section>
+                <p id="searchCount" class="search-count" aria-live="polite"></p>
+                <div id="searchResults" class="search-results"></div>
+            </section>
 
-        <section id="weather">
-            <h2>Weather right now</h2>
-            <div class="weather-grid" id="weatherGrid"></div>
-            <p class="source">Data: Open-Meteo. Each card shows the weather in the capital city.</p>
-        </section>
+            <section id="weather">
+                <h2>Weather right now</h2>
+                <div class="weather-grid" id="weatherGrid"></div>
+                <p class="source">Data: Open-Meteo. Each card shows the weather in the capital city.</p>
+            </section>
 
-       <section id="many">
-            <h2>World facts</h2>
-            <p class="flip-hint">Tap a card to see the answer.</p>
+            <section id="many">
+                    <h2>World facts</h2>
+                    <p class="flip-hint">Tap a card to see the answer.</p>
 
-            <div class="flip-grid" id="flipGrid"></div>
+                    <div class="flip-grid" id="flipGrid"></div>
 
-            <div class="note fact-note" id="factNote" role="status" hidden>
-                <p><strong>Note:</strong> <span id="factNoteText"></span></p>
-            </div>
-        </section>
+                    <div class="note fact-note" id="factNote" role="status" hidden>
+                        <p><strong>Note:</strong> <span id="factNoteText"></span></p>
+                    </div>
+                </section>
 
-
+        </main>
         <footer>
              <p>&copy; 2026 Shatha & Shahd Jawas. All rights reserved.</p>
              <p class="credits">Credits: Bootstrap, jQuery, Google Fonts · Weather: Open-Meteo · Code and text help: Claude (Anthropic). Images: Google</p>
