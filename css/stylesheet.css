@@ -12,6 +12,13 @@
     --mist: var(--bg);              /* same teal as --bg; quiz.css uses this name */
     --error: #c8102e;
     --success: #1f7a4d;
+    --nav-bg: #204345;                       /* written as a color, not var(--firooze), because dark mode changes --firooze */
+    --nav-text: #ffffff;
+    --nav-line: rgba(255, 255, 255, 0.4);
+    --nav-hover-bg: rgba(255, 255, 255, 0.18);
+    --nav-btn-bg: #f2b84b;             /* filled button color (Sign up / Profile) */
+    --nav-btn-text: #1d3b3d;           /* text on that button */
+    --nav-btn-hover: #ffd27a;          /* filled button on hover */
 }
 
 body{
@@ -35,35 +42,117 @@ body{
 }
 
 /* Navbar: hover, keyboard focus and current page (colors come from Bootstrap's navbar variables) */
-.navbar {
-    --bs-navbar-color: var(--panel-1);
-    --bs-navbar-hover-color: var(--firooze);
-    --bs-navbar-active-color: var(--firooze);
-    --bs-navbar-padding-y: 0;          /* removes the top/bottom padding of the bar */
+.site-nav {
+    background: var(--nav-bg);
+    padding: 0.5rem 0;
     margin-bottom: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --bs-navbar-color: var(--nav-text);
+    --bs-navbar-hover-color: var(--nav-text);
+    --bs-navbar-active-color: var(--nav-text);
 }
-.navbar .nav-link {
-    position: relative;
+.site-nav .navbar-brand,
+.site-nav .navbar-brand:hover,
+.site-nav #nav-brand { color: var(--nav-text); }
+.site-nav .navbar-toggler { border-color: var(--nav-line); }
+.site-nav .navbar-toggler-icon { filter: invert(1); }
+
+/* page links (middle) */
+.site-nav .nav-center .nav-link {
+    color: var(--nav-text);
     font-weight: 500;
-    transition: color 0.2s;
+    border-radius: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    transition: background 0.2s;
 }
+.site-nav .nav-center .nav-link:hover,
+.site-nav .nav-center .nav-link.active { background: var(--nav-hover-bg); }
+.site-nav .nav-center .nav-link.active { font-weight: 700; }
 
-.navbar .nav-link.active {
-    font-weight: 700;
-    background-color: #c6dede;
-}
-
-/* ----- navbar: the Log in / Profile links ----- */
-/* phone and tablet: the menu is vertical, so Log in / Sign up (or Profile / Log out) stack like the other links */
-#authNav {
+/* buttons (right): Log in, Sign up / Profile, Log out, theme toggle */
+.site-nav .nav-actions {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--nav-line);   /* phone: separates the buttons from the links */
+}
+#authNav { display: contents; }              /* its buttons become direct children of .nav-actions */
+
+.site-nav .nav-actions .nav-link {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: 2px solid var(--nav-text);
+    border-radius: 0.6rem;
+    background: transparent;
+    color: var(--nav-text);
+    font: inherit;
+    font-weight: 700;
+    line-height: 1.5;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.site-nav .nav-actions .nav-link:hover {
+    background: var(--nav-text);
+    color: var(--nav-bg);
+    transform: translateY(-2px);
+}
+.site-nav .nav-actions .nav-link.active { background: var(--nav-hover-bg); }
+
+/* the main action is filled: Sign up when logged out, Profile when logged in */
+.site-nav .nav-actions .nav-link[href="signup.html"],
+.site-nav .nav-actions .nav-link[href="profile.html"] {
+    background: var(--nav-btn-bg);
+    border-color: var(--nav-btn-bg);
+    color: var(--nav-btn-text);
+}
+.site-nav .nav-actions .nav-link[href="signup.html"]:hover,
+.site-nav .nav-actions .nav-link[href="profile.html"]:hover {
+    background: var(--nav-btn-hover);
+    border-color: var(--nav-btn-hover);
+    color: var(--nav-btn-text);
 }
 
-#authNav .nav-link {
-    font-family: inherit;
-    text-align: left;
+.site-nav .nav-actions .nav-link:focus-visible,
+.site-nav .nav-center .nav-link:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
 }
+
+.site-nav .nav-actions .nav-link { white-space: nowrap; }   /* stops "Log out" wrapping to two lines */
+
+.site-nav .nav-actions .nav-profile {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.2rem 0.9rem 0.2rem 0.25rem;
+}
+.nav-avatar {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--nav-btn-text);
+}
+span.nav-avatar {                     /* no photo: circle with the first letter */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--nav-btn-text);
+    color: var(--nav-btn-bg);
+    font-weight: 800;
+}
+.nav-profile-name {
+    max-width: 9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 /* map */
 #map{
@@ -740,10 +829,39 @@ footer .credits {
     }
 }
 
-/* laptop (992px and wider, where Bootstrap shows the menu in one row): put them side by side */
+/* laptop: brand on the left, links centered with | between them, buttons on the right */
 @media (min-width: 992px) {
-    #authNav {
-        flex-direction: row;
-        flex-wrap: nowrap;
+    .site-nav .container-fluid {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
     }
+    .site-nav .navbar-collapse { display: contents !important; }
+    .site-nav .nav-actions {
+        justify-self: end;
+        flex-wrap: nowrap;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    .nav-center { flex-direction: row; align-items: center; }
+    .nav-center .nav-item { display: flex; align-items: center; }
+    .nav-center .nav-item + .nav-item::before {
+        content: "|";
+        color: var(--nav-line);
+        margin: 0 0.4rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .site-nav .nav-actions { gap: 0.4rem; }
+    .site-nav .nav-actions .nav-link {
+        padding: 0.25rem 0.7rem;
+        font-size: 0.85rem;
+        border-width: 1.5px;
+        border-radius: 0.5rem;
+    }
+        .site-nav .nav-actions .nav-profile { padding: 0.15rem 0.7rem 0.15rem 0.2rem; }
+    .nav-avatar { width: 26px; height: 26px; }
+    .nav-profile-name { max-width: 6rem; }
 }

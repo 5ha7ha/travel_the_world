@@ -17,31 +17,27 @@
 </head>
 <body class="country">
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <img src="favicon/apple-touch-icon.png" alt="logo" class="d-inline-block">
-                <span id="nav-brand">Travel the World</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html" id="homeNav">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="games.html">Games</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="plan.html">Plan My Trip</a>
-                    </li>
-                    <li class="nav-item" id="authNav"></li>
-                </ul>
+    <nav class="navbar navbar-expand-lg site-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="favicon/apple-touch-icon.png" alt="logo" class="d-inline-block">
+                    <span id="nav-brand">Travel the World</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav nav-center">
+                        <li class="nav-item"><a class="nav-link" href="index.html" id="homeNav" aria-current="page">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="games.html">Games</a></li>
+                        <li class="nav-item"><a class="nav-link" href="plan.html">Plan My Trip</a></li>
+                    </ul>
+                    <div class="nav-actions">
+                        <div id="authNav"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
     <!-- shown when the address has no country, or a wrong one -->
     <section id="picker" hidden>
