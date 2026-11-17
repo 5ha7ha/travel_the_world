@@ -42,35 +42,31 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        const menu = document.querySelector(".navbar-nav");
-        if (menu === null) return;
-        if (document.getElementById("themeToggle") !== null) return;   // already added
-        
-        const item = document.createElement("li");
-        item.className = "nav-item";
+    const slot = document.querySelector(".nav-actions");
+    if (slot === null) return;
+    if (document.getElementById("themeToggle") !== null) return;   // already added
 
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "nav-link theme-toggle";
-        button.id = "themeToggle";
-        updateButton(button, getTheme());
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "nav-link theme-toggle";
+    button.id = "themeToggle";
+    updateButton(button, getTheme());
 
-        button.addEventListener("click", function () {
-            const next = getTheme() === "dark" ? "light" : "dark";
-            applyTheme(next);
-            saveTheme(next);
-            updateButton(button, next);
-        });
-
-        item.appendChild(button);
-        menu.appendChild(item);
-
-        // if the mode is changed in another tab, this tab follows
-        window.addEventListener("storage", function (event) {
-            if (event.key === THEME_KEY) {
-                applyTheme(getTheme());
-                updateButton(button, getTheme());
-            }
-        });
+    button.addEventListener("click", function () {
+        const next = getTheme() === "dark" ? "light" : "dark";
+        applyTheme(next);
+        saveTheme(next);
+        updateButton(button, next);
     });
+
+    slot.appendChild(button);
+
+    // if the mode is changed in another tab, this tab follows
+    window.addEventListener("storage", function (event) {
+        if (event.key === THEME_KEY) {
+            applyTheme(getTheme());
+            updateButton(button, getTheme());
+        }
+    });
+});
 })();

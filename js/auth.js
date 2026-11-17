@@ -162,7 +162,7 @@ function clearTickets(email) {
 }
 
 // ===== NAVBAR =====
-// fills <li id="authNav"> : "Log in" and "Sign up", or "Profile" and "Log out"
+// fills <div id="authNav"> : "Log in" and "Sign up", or "Profile" and "Log out"
 function makeNavLink(text, href) {
     const link = document.createElement("a");
     link.className = "nav-link";
@@ -190,7 +190,29 @@ function updateNav() {
         return;
     }
 
-    slot.appendChild(makeNavLink("Profile", "profile.html"));
+    const user = getCurrentUser();
+const profile = makeNavLink("", "profile.html");
+profile.classList.add("nav-profile");
+profile.setAttribute("aria-label", "Profile of " + user.fullName);
+
+// the photo, or the first letter of the name if there is no photo
+let avatar;
+if (user.photo) {
+    avatar = document.createElement("img");
+    avatar.src = user.photo;
+    avatar.alt = "";
+} else {
+    avatar = document.createElement("span");
+    avatar.textContent = user.fullName.trim().charAt(0).toUpperCase();
+}
+avatar.className = "nav-avatar";
+
+const name = document.createElement("span");
+name.className = "nav-profile-name";
+name.textContent = user.fullName.trim().split(" ")[0];   // first name only
+
+profile.append(avatar, name);
+slot.appendChild(profile);
 
     const logout = document.createElement("button");
     logout.type = "button";

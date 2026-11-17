@@ -24,8 +24,12 @@ html[data-theme="dark"] body {
     transition: background-color 0.25s, color 0.25s;
 }
 
-/* ----- navbar ----- */
-html[data-theme="dark"] .navbar .nav-link.active { background-color: #1f3a3c; }
+/* ----- navbar ----- #0a0d19 */
+html[data-theme="dark"] .site-nav {
+    --nav-bg: #0a1819;
+    --nav-line: rgba(227, 241, 241, 0.3);
+    border-bottom: 1px solid var(--card-border);
+}
 html[data-theme="dark"] .navbar-toggler { border-color: var(--card-border); }
 html[data-theme="dark"] .navbar-toggler-icon { filter: invert(1); }
 
