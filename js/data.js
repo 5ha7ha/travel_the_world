@@ -13,6 +13,7 @@ const countries = [
         languages: ["Arabic"],
         currency: "Rial",
         population: 34,
+        lat: 15.37, lon: 44.19,           // Sana'a
         flag: "img/Yemen/yemenFlag.png",
         map: "img/Yemen/yemen-bg.png",
         page: "country.html?c=yemen",
@@ -35,6 +36,7 @@ const countries = [
         languages: ["Spanish"],
         currency: "Euro",
         population: 48,
+        lat: 40.42, lon: -3.70,           // Madrid
         flag: "img/Spain/spainFlag.png",
         map: "img/Spain/spain_map_bg.png",
         page: "country.html?c=spain",
@@ -57,6 +59,7 @@ const countries = [
         languages: ["Kazakh", "Russian"],
         currency: "Tenge",
         population: 20,
+        lat: 51.17, lon: 71.45,        // Astana
         flag: "img/Kazakh/Flag-Kazakhstan.webp",
         map: "img/Kazakh/Kazakhstan_Map_bg.png",
         page: "country.html?c=kazakhstan",
@@ -79,6 +82,7 @@ const countries = [
         languages: ["Korean"],
         currency: "Won",
         population: 52,
+        lat: 37.57, lon: 126.98,       // Seoul
         flag: "img/Korea/Flag_of_South_Korea.svg",
         map: "img/Korea/korea-map-bg.png",
         page: "country.html?c=korea",
@@ -101,6 +105,7 @@ const countries = [
         languages: ["Japanese"],
         currency: "Yen",
         population: 124,
+        lat: 35.68, lon: 139.69,       // Tokyo
         flag: "img/Japan/japanFlag.webp",
         map: "img/Japan/japan-map-bg.svg",
         page: "country.html?c=japan",
@@ -123,6 +128,7 @@ const countries = [
         languages: ["German"],
         currency: "Euro",
         population: 84,
+        lat: 52.52, lon: 13.41,        // Berlin
         flag: "img/Germany/germanyFlag.webp",
         map: "img/Germany/germany-map-bg.svg",
         page: "country.html?c=germany",
@@ -145,6 +151,7 @@ const countries = [
         languages: ["English"],
         currency: "US Dollar",
         population: 340,
+        lat: 38.91, lon: -77.04,       // Washington, D.C.
         flag: "img/USA/usaFlag.webp",
         map: "img/USA/usa-map-bg.svg",
         page: "country.html?c=usa",
@@ -167,6 +174,7 @@ const countries = [
         languages: ["English", "French"],
         currency: "Canadian Dollar",
         population: 41,
+        lat: 45.42, lon: -75.70,       // Ottawa
         flag: "img/Canada/canadaFlag.png",
         map: "img/Canada/canada-map-bg.webp",
         page: "country.html?c=canada",
@@ -189,6 +197,7 @@ const countries = [
         languages: ["Russian"],
         currency: "Ruble",
         population: 144,
+        lat: 55.76, lon: 37.62,        // Moscow
         flag: "img/Russia/russiaFlag.webp",
         map: "img/Russia/russia-map-bg.svg",
         page: "country.html?c=russia",
@@ -211,6 +220,7 @@ const countries = [
         languages: ["Portuguese"],
         currency: "Real",
         population: 212,
+        lat: -15.79, lon: -47.88,      // Brasília
         flag: "img/Brazil/brazilFlag.webp",
         map: "img/Brazil/brazil-map-bg.svg",
         page: "country.html?c=brazil",
@@ -233,6 +243,7 @@ const countries = [
         languages: ["Arabic"],
         currency: "Riyal",
         population: 35,
+        lat: 24.71, lon: 46.68,        // Riyadh
         flag: "img/Saudi/saudiFlag.webp",
         map: "img/Saudi/saudi-map-bg.svg",
         page: "country.html?c=saudi",
