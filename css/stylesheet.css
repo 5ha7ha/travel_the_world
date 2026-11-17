@@ -252,17 +252,19 @@ span.nav-avatar {                     /* no photo: circle with the first letter 
 }
 
 
-
-
-
-/* Facts Table */
+/* ===== World facts (flip cards) ===== */
 #many {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
-                    url('../img/city.jpg');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  padding-bottom: 60px;
+    --facts-bg: #2f6f73;            /* the section color: change it here */
+    background: var(--facts-bg);
+    padding: 2.5rem 0 3rem;
+    color: #fff;
+}
+
+#many h2 {
+    text-align: center;
+    margin: 0 0 0.5rem;
+    font-size: 1.8rem;
+    color: #fff;
 }
 
 .facts {
@@ -277,57 +279,155 @@ span.nav-avatar {                     /* no photo: circle with the first letter 
     background: transparent;                        /* allows the background image to show through */
 }
 
-.facts th,
-.facts td {
-    padding: 14px 18px;
-    text-align: left;
-    border-bottom: 1px solid #cfe3e3;
-}
-
-.facts th {
-    width: 50%;
-    font-weight: 600;
-    background-color: rgba(47, 111, 115, 0.35);   /* teal, 35% visible */
-    color: white;
-    backdrop-filter: blur(6px);  
-}
-
-.facts td {
-    font-weight: 500;
-    background-color: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(6px);
-}
-
-.facts tr:nth-child(even) td {
-    background-color: rgba(234, 245, 245, 0.7);;
-}
-
-.facts tr:last-child th,
-.facts tr:last-child td {
-    border-bottom: none;
-}
-
-.facts tr:hover td {
-    background-color: rgba(207, 231, 231, 0.85);
-}
-
-#many h2 {
+.flip-hint {
     text-align: center;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
-    padding-top: 1rem;
-    font-size: 1.8rem;
-    color: white;
-}
-.note {
-    max-width: 600px;
-    margin: 1rem auto;
-    padding: 12px 16px;
-    border-left: 4px solid var(--firooze);
-    background-color: rgba(255, 255, 255, 0.55);;
-    border-radius: 6px;
+    color: #cfeeee;
+    margin: 0 0 1.5rem;
 }
 
+.flip-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* the button is only a frame: no default button look */
+.flip-card {
+    height: 150px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+    perspective: 900px;
+    transition: transform 0.2s;
+}
+
+.flip-card:hover {
+    transform: translateY(-5px);
+}
+
+.flip-card:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+    border-radius: 14px;
+}
+
+/* the part that rotates */
+.flip-inner {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.is-flipped .flip-inner {
+    transform: rotateY(180deg);
+}
+
+/* both sides sit on top of each other */
+.flip-front,
+.flip-back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.2rem 1rem 1rem;      /* extra space on top for the badge */
+    border-radius: 14px;
+    text-align: center;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* question side: white card with a bright bottom edge */
+.flip-front {
+    background: #fff;
+    color: #1d3b3d;
+    font-size: 1.15rem;
+    border-bottom: 6px solid #00A6A6;
+}
+
+/* the round "?" badge */
+.flip-front::before {
+    content: "?";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #2f6f73;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+/* answer side: dark card, big white text */
+.flip-back {
+    background: #1d3b3d;
+    color: #fff;
+    font-size: 1.8rem;
+    transform: rotateY(180deg);
+}
+
+.flip-back::before {
+    content: "Answer";
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #cfeeee;
+}
+
+/* the note under the cards */
+#many .note {
+    width: calc(100% - 32px);
+    max-width: 700px;
+    margin: 1.5rem auto 0;
+    padding: 7px;
+    background-color: rgba(255, 255, 255, 0.895);
+    color: #1d3b3d;
+    border-left: 6px solid #a60300;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+#many .note p {
+    margin: 0;
+}
+
+.fact-note {
+    animation: noteIn 0.35s ease;   /* plays every time the note appears */
+}
+
+@keyframes noteIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (min-width: 768px) {
+    .flip-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+    .flip-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flip-inner { transition: none; }
+    .fact-note { animation: none; }
+}
 
 /* ===== Plan My Trip page ===== */
 .plan-intro {
