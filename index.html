@@ -16,6 +16,7 @@
     <script src="js/search.js" defer></script>
     <script src="js/auth.js" defer></script>
     <script src="js/theme.js"></script>
+    <script src="js/facts.js" defer></script>
     </head>
     <body>
 
@@ -94,48 +95,14 @@
             <p class="source">Data: Open-Meteo. Each card shows the weather in the capital city.</p>
         </section>
 
-        <section id="many">
-            <h2>How many ________ in the world?</h2>
-            <table class="facts">
-            <tr>
-                <th>Countries</th>
-                <td>195</td>
-            </tr>
-            <tr>
-                <th>Languages</th>
-                <td>7100+</td>
-            </tr>
-            <tr>
-                <th>Continents</th>
-                <td>7</td>
-            </tr>
-            <tr>
-                <th>Oceans</th>
-                <td>5</td>
-            </tr>
-            <tr>
-                <th>Currencies in use</th>
-                <td>about 180</td>
-            </tr>
-            <tr>
-                <th>People on Earth</th>
-                <td>about 8 billion</td>
-            </tr>
-            <tr>
-                <th>Largest country</th>
-                <td>Russia</td>
-            </tr>
-            <tr>
-                <th>Smallest country</th>
-                <td>Vatican City</td>
-            </tr>
-            <tr>
-                <th>Most visited country</th>
-                <td>France</td>
-            </tr>
-        </table>
-            <div class="note">
-                <p><strong>Note:</strong> There are 7,170 living languages spoken in the world today. However, linguistic diversity is heavily concentrated. Just the top 20 languages are spoken by more than half of the entire global population. Conversely, about 44% of the world's languages are considered endangered, often spoken by fewer than 1,000 people.</p>
+       <section id="many">
+            <h2>World facts</h2>
+            <p class="flip-hint">Tap a card to see the answer.</p>
+
+            <div class="flip-grid" id="flipGrid"></div>
+
+            <div class="note fact-note" id="factNote" role="status" hidden>
+                <p><strong>Note:</strong> <span id="factNoteText"></span></p>
             </div>
         </section>
 

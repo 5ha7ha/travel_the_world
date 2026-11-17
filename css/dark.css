@@ -1,7 +1,4 @@
-/* ===== DARK MODE =====
-   Load this file LAST on every page (after stylesheet.css, account.css, country.css, quiz.css, game.css).
-   Light mode is the normal CSS. Everything here applies only when <html data-theme="dark">.
-   First the CSS variables change, then the places where a color was written directly (white, #b9d6d6...). */
+/* ===== DARK MODE =====*/
 
 html[data-theme="dark"] {
     color-scheme: dark;
@@ -117,6 +114,22 @@ html[data-theme="dark"] .ticket-remove:hover { background: #3a1a1f; }
 /* ----- search ----- */
 html[data-theme="dark"] .search-badge,
 html[data-theme="dark"] .search-card a { color: var(--firooze); }
+
+/* ----- flip cards and world facts ----- */
+html[data-theme="dark"] #many { --facts-bg: #0d2733; }   /* same dark blue as the map */
+
+html[data-theme="dark"] .flip-front {
+    background: var(--card);
+    color: #e3f1f1;
+}
+html[data-theme="dark"] .flip-front::before { background: #2f6f73; }
+html[data-theme="dark"] .flip-back { background: #2f6f73; }
+html[data-theme="dark"] .flip-back::before { color: #e3f1f1; }
+
+html[data-theme="dark"] #many .note {
+    background: var(--card);
+    color: #e3f1f1;
+}
 
 /* ----- games ----- */
 html[data-theme="dark"] #game {
