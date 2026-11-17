@@ -370,4 +370,4 @@ $("#againBtn").on("click", function () {
 // ===== START =====
 prefillUser();
 showLoginNotice();
-updateSummary
+updateSummary();
